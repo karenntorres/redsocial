@@ -12,3 +12,4 @@ routerUsers.delete('/:id',controllerUsers.deleteUser);
 
 export default routerUsers; 
 
+
