@@ -1,6 +1,7 @@
 import express from "express"; 
 import morgan from "morgan"; 
 import cors from "cors";
+import routerUsers from "./routers/routerUsers.js";
 import routerPost from "./routers/routerPost.js";
 import routerComentarios from "./routers/routerComments.js";
 
@@ -12,6 +13,7 @@ servidor.use(cors());
 // Rutas
 servidor.use('/posts', routerPost);
 servidor.use('/comentarios', routerComentarios);
+servidor.use('/users',routerUsers);
 
 // Ruta por defecto
 servidor.get('/', (sol, res) => {
