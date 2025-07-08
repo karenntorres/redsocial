@@ -1,15 +1,24 @@
-import {Router} from 'express';
-import controllerUsers from '../controllers/controllerUsers.js';
+import { Router } from 'express';
+import controllerUsers, { forgotPassword } from '../controllers/controllerUsers.js';
 
 const routerUsers = Router();
 
-routerUsers.post('/',controllerUsers.createUser);
+// Crear nuevo usuario con imagen y contraseña encriptada
+routerUsers.post('/', controllerUsers.createUser);
+
+// Obtener un usuario por ID
 routerUsers.get('/:id', controllerUsers.readUser);
+
+// Obtener todos los usuarios
 routerUsers.get('/', controllerUsers.readAllUsers);
+
+// Actualizar info de un usuario
 routerUsers.put('/:id', controllerUsers.updateUser);
-routerUsers.delete('/:id',controllerUsers.deleteUser);
 
+// Eliminar usuario por ID
+routerUsers.delete('/:id', controllerUsers.deleteUser);
 
-export default routerUsers; 
+// Recuperación de contraseña
+routerUsers.post('/forgot-password', forgotPassword);
 
-
+export default routerUsers

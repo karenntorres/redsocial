@@ -1,7 +1,7 @@
-import bcrypt from "bcryptjs"; // se usa para encriptar la constraseña
-import modelUsers from "../models/modelUsers.js"; // conexion con user's model
+import bcrypt from "bcryptjs";
+import modelUsers from "../models/modelUsers.js";
 import crypto from "crypto";
-import nodemailer from "nodemailer"; // para enviar correos de forma masiva, desde el back
+import nodemailer from "nodemailer";
 import { imagesStorage } from "../middlewares/uploadImages.js";
 
 const controllerUsers = {
@@ -9,37 +9,55 @@ const controllerUsers = {
     try {
       imagesStorage(sol, res, async (error) => {
         if (error) {
-          res.json({
+          return res.json({
             result: "mistake",
-            message: "An error occurred while updloading the image",
-            data: null,
+            message: "An error occurred while uploading the image",
+            data: error.message || error,
           });
-        } if(imagesStorage){
-            const {password} = sol.body; //plane text
-            const passwordEncrypted = await bcrypt.hash(password, 10);
-            const newProfileImageandPassword = new modelUsers({
-                name:sol.body.name,
-                email: sol.body.email,
-                password: passwordEncrypted,
-                username: sol.body.username,
-                pfPicture: sol.file.filename,
-            });
-        }       
-      });
+        }
 
-      const createdUser = await newProfileImageandPassword.save();
-      if (createdUser._id) {
-        res.json({
-          result: "All Fine",
-          message: "User has been created",
-          data: createdUser._id,
-        });
-      }
-    } catch (error) {
+        try {
+          const { name, email, password, username } = sol.body;
+
+          // Encriptar contraseña
+          const passwordEncrypted = await bcrypt.hash(password, 10);
+
+          const newUser = new modelUsers({
+            name,
+            email,
+            password: passwordEncrypted,
+            username,
+            pfPicture: sol.file?.filename || null,
+          });
+
+          const createdUser = await newUser.save();
+
+          if (createdUser?._id) {
+            return res.json({
+              result: "All Fine",
+              message: "User has been created",
+              data: createdUser._id,
+            });
+          } else {
+            return res.json({
+              result: "mistake",
+              message: "User could not be created",
+              data: null,
+            });
+          }
+        } catch (innerError) {
+          return res.json({
+            result: "mistake",
+            message: "An error occurred while creating the user",
+            data: innerError.message || innerError,
+          });
+        }
+      });
+    } catch (outerError) {
       res.json({
         result: "mistake",
-        message: "An error occured while creating the user",
-        data: error,
+        message: "Unexpected error occurred",
+        data: outerError.message || outerError,
       });
     }
   },
@@ -47,18 +65,24 @@ const controllerUsers = {
   readUser: async (sol, res) => {
     try {
       const userFound = await modelUsers.findById(sol.params.id);
-      if (userFound._id) {
+      if (userFound?._id) {
         res.json({
           result: "All Fine",
           message: "User has been found",
           data: userFound,
+        });
+      } else {
+        res.status(404).json({
+          result: "mistake",
+          message: "User not found",
+          data: null,
         });
       }
     } catch (error) {
       res.json({
         result: "mistake",
         message: "An error occurred while reading the user",
-        data: error,
+        data: error.message || error,
       });
     }
   },
@@ -74,77 +98,91 @@ const controllerUsers = {
     } catch (error) {
       res.json({
         result: "mistake",
-        message: "An error occurred while reading all Users",
-        data: error,
+        message: "An error occurred while reading all users",
+        data: error.message || error,
       });
     }
   },
 
   updateUser: async (sol, res) => {
     try {
-
       const userUpdated = await modelUsers.findByIdAndUpdate(
         sol.params.id,
-        sol.body
+        sol.body,
+        { new: true }
       );
-      if (userUpdated._id) {
+      if (userUpdated?._id) {
         res.json({
           result: "All Fine",
           message: "User info has been updated",
           data: userUpdated._id,
         });
-      }
-    } catch (error) {
-      res.json({
-        result: "mistake",
-        message: "An error occurred while updating the user info",
-        data: error,
-      });
-    } 
-  },
-
-  deleteUser: async (sol, res) => {
-    try {
-      const deletedUser = await modelUsers.findByIdAndDelete(sol.params.id);
-      if (deletedUser._id) {
-        res.json({
-          result: "All Fine",
-          message: "User has been deleted",
+      } else {
+        res.status(404).json({
+          result: "mistake",
+          message: "User not found",
           data: null,
         });
       }
     } catch (error) {
       res.json({
         result: "mistake",
-        message: "An error ocurred while deleting the user",
-        data: error,
+        message: "An error occurred while updating the user info",
+        data: error.message || error,
+      });
+    }
+  },
+
+  deleteUser: async (sol, res) => {
+    try {
+      const deletedUser = await modelUsers.findByIdAndDelete(sol.params.id);
+      if (deletedUser?._id) {
+        res.json({
+          result: "All Fine",
+          message: "User has been deleted",
+          data: null,
+        });
+      } else {
+        res.status(404).json({
+          result: "mistake",
+          message: "User not found",
+          data: null,
+        });
+      }
+    } catch (error) {
+      res.json({
+        result: "mistake",
+        message: "An error occurred while deleting the user",
+        data: error.message || error,
       });
     }
   },
 };
 
-//PARA CREACIÓN DE CONTRASEÑAS ALEATOREAS:
-
+// Función para generar contraseña aleatoria
 function generateRandomPassword() {
   return crypto.randomBytes(6).toString("hex");
 }
 
+// Recuperación de contraseña
 export const forgotPassword = async (sol, res) => {
   try {
     const { email } = sol.body;
     const user = await modelUsers.findOne({ email });
+
     if (!user) {
       return res
         .status(404)
         .json({ message: "Email address was not found in Database" });
     }
+
     const newPassword = generateRandomPassword();
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     user.password = hashedPassword;
     await user.save();
 
-    // Configuración de servicio de correo:
+    // Servicio de correo
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -153,34 +191,24 @@ export const forgotPassword = async (sol, res) => {
       },
     });
 
-    // email content
-
     const mailOptions = {
-      from: "proyectoredsocial2025@gmail.com",
+      from: process.env.EMAIL_NODE,
       to: email,
       subject: "Recuperación de contraseña",
-      text: `Hola ${user.name}, \n\ Tu nueva contraseña es: ${newPassword} \n\ Recuerda actualizar tu contraseña en tu perfil por seguridad. \n\ Saludos desde el area de soporte.`,
+      text: `Hola ${user.name},\n\nTu nueva contraseña es: ${newPassword}\n\nPor favor cámbiala después de iniciar sesión por seguridad.\n\nSaludos, Soporte`,
     };
-
-    // envío del correo
 
     await transporter.sendMail(mailOptions);
 
-    // To answer:
-
-    res
-      .status(200)
-      .json({
-        message: "A new password has been sent to the registered email",
-      });
+    res.status(200).json({
+      message: "A new password has been sent to the registered email",
+    });
   } catch (error) {
-    console.error("Error by resetting the password", error),
-      res
-        .status(500)
-        .json({
-          message: "Internal error in the server",
-          error: error.message,
-        });
+    console.error("Error al recuperar contraseña:", error);
+    res.status(500).json({
+      message: "Internal server error",
+      error: error.message || error,
+    });
   }
 };
 

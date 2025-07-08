@@ -3,12 +3,7 @@ import "./conexion.js";
 
 import servidor from "./servidor.js";
 
-servidor.listen(3000, () => {
-	console.log("The server is listening the link http://localhost:3001");
+const PORT = 3001;
+servidor.listen(PORT, () => {
+	console.log(`The server is listening at http://localhost:${PORT}`);
 });
-
-//comentario de prueba
-
-
-//comment joan 
-// hola
