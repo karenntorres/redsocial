@@ -1,24 +1,20 @@
+// External imports
 import { Router } from 'express';
+
+// Internal controllers
 import controllerUsers, { forgotPassword } from '../controllers/controllerUsers.js';
+import { imagesStorage } from '../middlewares/uploadImages.js';
 
 const routerUsers = Router();
 
-// Crear nuevo usuario con imagen y contraseña encriptada
-routerUsers.post('/', controllerUsers.createUser);
-
-// Obtener un usuario por ID
+// 👤 User routes
+routerUsers.post('/', imagesStorage, controllerUsers.createUser);
 routerUsers.get('/:id', controllerUsers.readUser);
-
-// Obtener todos los usuarios
 routerUsers.get('/', controllerUsers.readAllUsers);
-
-// Actualizar info de un usuario
 routerUsers.put('/:id', controllerUsers.updateUser);
-
-// Eliminar usuario por ID
 routerUsers.delete('/:id', controllerUsers.deleteUser);
 
-// Recuperación de contraseña
+// Password recovery
 routerUsers.post('/forgot-password', forgotPassword);
 
-export default routerUsers
+export default routerUsers;
