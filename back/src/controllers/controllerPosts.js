@@ -1,54 +1,34 @@
 import modelPosts from '../models/modelPosts.js';
-import multer from 'multer';
-
-// Configurar almacenamiento para imagen
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads');
-  },
-  filename: function (req, file, cb) {
-    const nombreFinal = Date.now() + '-' + file.originalname;
-    cb(null, nombreFinal);
-  }
-});
-const upload = multer({ storage }).single('imagen');
+import fs from 'fs';
+import path from 'path';
 
 const controllerPosts = {
-  // Crear publicación con imagen
+  // Crear publicación
   crearPost: async (req, res) => {
-    upload(req, res, async (error) => {
-      if (error) {
-        return res.json({
-          result: 'mistake',
-          message: 'Error al subir la imagen',
-          data: null,
-        });
-      }
+    try {
+      const nuevaPublicacion = new modelPosts({
+        usuario: req.body.usuario,
+        contenido: req.body.contenido,
+        imagen: req.file?.filename || null,
+      });
 
-      try {
-        const nuevaPublicacion = new modelPosts({
-          usuario: req.body.usuario,
-          contenido: req.body.contenido,
-          imagen: req.file ? req.file.filename : null,
-        });
+      const postGuardado = await nuevaPublicacion.save();
 
-        const postGuardado = await nuevaPublicacion.save();
-        res.json({
-          result: 'fine',
-          message: 'Publicación creada',
-          data: postGuardado._id,
-        });
-      } catch (err) {
-        res.json({
-          result: 'mistake',
-          message: 'Error al crear la publicación',
-          data: err,
-        });
-      }
-    });
+      res.json({
+        result: 'fine',
+        message: 'Publicación creada',
+        data: postGuardado._id,
+      });
+    } catch (error) {
+      res.json({
+        result: 'mistake',
+        message: 'Error al crear la publicación',
+        data: error,
+      });
+    }
   },
 
-  // Obtener todas las publicaciones
+  // Listar todas las publicaciones
   listarPosts: async (req, res) => {
     try {
       const posts = await modelPosts.find().sort({ createdAt: -1 });
@@ -57,16 +37,16 @@ const controllerPosts = {
         message: 'Publicaciones encontradas',
         data: posts,
       });
-    } catch (err) {
+    } catch (error) {
       res.json({
         result: 'mistake',
-        message: 'Error al leer todas las publicaciones',
-        data: err,
+        message: 'Error al leer publicaciones',
+        data: error,
       });
     }
   },
 
-  // Ver una publicación por ID
+  // Ver publicación por ID
   verPost: async (req, res) => {
     try {
       const post = await modelPosts.findById(req.params.id);
@@ -76,12 +56,18 @@ const controllerPosts = {
           message: 'Publicación encontrada',
           data: post,
         });
+      } else {
+        res.status(404).json({
+          result: 'mistake',
+          message: 'Publicación no encontrada',
+          data: null,
+        });
       }
-    } catch (err) {
+    } catch (error) {
       res.json({
         result: 'mistake',
-        message: 'Error al leer la publicación',
-        data: err,
+        message: 'Error al buscar la publicación',
+        data: error,
       });
     }
   },
@@ -90,18 +76,31 @@ const controllerPosts = {
   eliminarPost: async (req, res) => {
     try {
       const eliminado = await modelPosts.findByIdAndDelete(req.params.id);
+
       if (eliminado) {
+        // Elimina la imagen si existe
+        const ruta = path.join('imagenes', eliminado.imagen);
+        if (fs.existsSync(ruta)) {
+          fs.unlinkSync(ruta);
+        }
+
         res.json({
           result: 'fine',
           message: 'Publicación eliminada',
+          data: eliminado._id,
+        });
+      } else {
+        res.status(404).json({
+          result: 'mistake',
+          message: 'Publicación no encontrada',
           data: null,
         });
       }
-    } catch (err) {
+    } catch (error) {
       res.json({
         result: 'mistake',
         message: 'Error al eliminar la publicación',
-        data: err,
+        data: error,
       });
     }
   },
