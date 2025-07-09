@@ -1,14 +1,16 @@
 import { Router } from 'express';
-import {
-    crearComentario,
-    obtenerComentariosPorPost,
-    eliminarComentario
-} from '../controllers/controllerComments.js';
+import controllerComments from "../controllers/controllerComments.js";
+
 
 const routerComments = Router();
 
-routerComments.post('/', crearComentario);
-routerComments.get('/:postId', obtenerComentariosPorPost);
-routerComments.delete('/:id', eliminarComentario);
+// Crear un nuevo comentario
+routerComments.post("/", controllerComments.crearComentario);
 
-export default routerComments;  
+// Obtener todos los comentarios de un post
+routerComments.get("/:postId", controllerComments.obtenerComentariosPorPost);
+
+// Eliminar un comentario por su ID
+routerComments.delete("/:id", controllerComments.eliminarComentario);
+
+export default routerComments;
