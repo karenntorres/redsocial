@@ -6,7 +6,7 @@ const controllerLogin = {
 		try {
 			const { username, password } = sol.body;
 
-			const userFound = await modelUsers.findOne({ email: username });
+			const userFound = await modelUsers.findOne({ username });
 
 			if (!userFound) {
 				return res.json({

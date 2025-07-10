@@ -3,6 +3,6 @@ import controllerLogin from "../controllers/controllerLogin.js";
 
 const routerLogin = Router();
 
-routerLogin.post("/", controllerLogin.iniciarSesion);
+routerLogin.post("/", controllerLogin.userLogin);
 
 export default routerLogin;
