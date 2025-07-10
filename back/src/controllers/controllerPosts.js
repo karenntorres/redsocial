@@ -3,11 +3,10 @@ import fs from 'fs';
 import path from 'path';
 
 const controllerPosts = {
-  // Crear publicación
+  // Crear publicación (sin usuario)
   crearPost: async (req, res) => {
     try {
       const nuevaPublicacion = new modelPosts({
-        usuario: req.body.usuario,
         contenido: req.body.contenido,
         imagen: req.file?.filename || null,
       });
