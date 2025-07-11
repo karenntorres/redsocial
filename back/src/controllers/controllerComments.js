@@ -1,20 +1,20 @@
 import Comentario from '../models/modelComments.js';
 
 const controllerComments = {
-  // Crear comentario
+  // Crear comentario (solo requiere contenido)
   crearComentario: async (req, res) => {
     try {
-      const { contenido, postId, usuario } = req.body;
+      const { contenido, usuario } = req.body;
 
-      if (!contenido || !postId) {
+      if (!contenido) {
         return res.status(400).json({
           result: 'mistake',
-          message: 'El contenido y el postId son obligatorios',
+          message: 'El contenido es obligatorio',
           data: null,
         });
       }
 
-      const nuevoComentario = new Comentario({ contenido, postId, usuario });
+      const nuevoComentario = new Comentario({ contenido, usuario });
       const comentarioGuardado = await nuevoComentario.save();
 
       res.status(201).json({
@@ -26,26 +26,6 @@ const controllerComments = {
       res.status(500).json({
         result: 'mistake',
         message: 'Error al crear el comentario',
-        data: error.message,
-      });
-    }
-  },
-
-  // Obtener comentarios por postId
-  obtenerComentariosPorPost: async (req, res) => {
-    try {
-      const { postId } = req.params;
-      const comentarios = await Comentario.find({ postId }).sort({ createdAt: -1 });
-
-      res.json({
-        result: 'fine',
-        message: 'Comentarios encontrados',
-        data: comentarios,
-      });
-    } catch (error) {
-      res.status(500).json({
-        result: 'mistake',
-        message: 'Error al obtener comentarios',
         data: error.message,
       });
     }

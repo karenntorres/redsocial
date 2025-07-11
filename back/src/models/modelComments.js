@@ -1,11 +1,13 @@
-import mongoose from "mongoose";
+import { Schema, model } from 'mongoose';
 
-const commentSchema = new mongoose.Schema({
+const commentSchema = new Schema({
   contenido: {
     type: String,
     required: true,
   }
+}, {
+  versionKey: false,     
+  timestamps: true      
 });
 
-const Comentario = mongoose.model("Comentario", commentSchema);
-export default Comentario;
+export default model("comentarios", commentSchema); // nombre de la colección
