@@ -9,9 +9,6 @@ routerComments.post("/", controllerComments.crearComentario);
 // Obtener todos los comentarios
 routerComments.get("/", controllerComments.obtenerTodosLosComentarios);
 
-// Obtener comentarios por postId
-routerComments.get("/:postId", controllerComments.obtenerComentariosPorPost);
-
 // Eliminar comentario
 routerComments.delete("/:id", controllerComments.eliminarComentario);
 
