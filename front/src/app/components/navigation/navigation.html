@@ -1,1 +1,54 @@
-<p>navigation works!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/home">
+      <img src="assets/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
+      RedSocial
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSocial" aria-controls="navbarSocial" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSocial">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" title="Inicio">
+            <i class="bi bi-house-door-fill"></i> Inicio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/posts" title="Explorar">
+            <i class="bi bi-compass-fill"></i> Explorar
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" title="Notificaciones">
+            <i class="bi bi-bell-fill"></i> Notificaciones
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" title="Mensajes">
+            <i class="bi bi-chat-dots-fill"></i> Mensajes
+          </a>
+        </li>
+      </ul>
+
+      <form class="d-flex me-3">
+        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+        <button class="btn btn-outline-primary" type="submit">Buscar</button>
+      </form>
+
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="assets/avatar.jpg" alt="Perfil" width="24" height="24" class="rounded-circle me-2">
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" routerLink="/profile">Mi perfil</a></li>
+          <li><a class="dropdown-item disabled" href="#">Configuración</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item disabled" href="#">Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
