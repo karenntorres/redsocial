@@ -1,1 +1,49 @@
-<p>register works!</p>
+<body class="container-fluid">
+
+    <header class="container-fluid">
+        <h1 class="arriba text-center mt-3">Create New</h1>
+        <h1 class="abajo text-center">Account</h1>
+        <span>
+        <h6 class="text-center mt-3 fw-bold"> Already Registered? Log in <a href="">here.</a> </h6>
+        </span>           
+    </header>
+    
+    <main>
+        <form class="m-5">
+            
+            <div class="col-md-6 container-fluid mt-2">
+                <label for="text" class="form-label fw-bold">Name</label>
+                <input type="text" class="form-control" placeholder="Type your full name here"/>
+            </div>
+            
+            <div class="col-md-6 container-fluid mt-2 ">
+                <label for="text" class="form-label fw-bold">Username</label>
+                <input type="text" class="form-control" placeholder="Choose an username longer than 5 characters" />
+            </div>            
+
+            <div class="col-md-6 container-fluid mt-2">
+                <label for="inputEmail4" class="form-label fw-bold">Email</label>
+                <input type="email" class="form-control" id="inputEmail4" 
+                placeholder="Type your email address here"
+                />
+            </div>
+            <div class="col-md-6 container-fluid mt-2">
+                <label for="inputPassword4" class="form-label fw-bold">Password</label>
+                <input type="password" class="form-control" id="inputPassword4" 
+                placeholder="Choose a password, at least 8 characters"
+                />
+            </div>
+            
+            <div class="col-12 text-center mt-4 container-fluid">
+                 <label for="text" class="form-label fw-bold">Upload your profile picture:</label> <br>
+                 <br>
+                 <input type="file" accept="image/*">
+            </div>
+
+            <div class="col-12 text-center mt-5 container-fluid">
+                <button type="submit" class=" btn color-button btn-primary">Sign up</button>
+            </div>
+        </form>
+
+    </main>
+</body>
