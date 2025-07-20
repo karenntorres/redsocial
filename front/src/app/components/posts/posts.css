@@ -1,0 +1,19 @@
+/* posts.css */
+.post-creator {
+  max-width: 600px;
+  margin: auto;
+  font-family: 'Roboto', sans-serif;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: #0093ab;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  color: #007c91;
+}
+
