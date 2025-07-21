@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.app-title {
+  color: #00838f;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  width: 50%;
+  max-width: 220px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 2rem;
+}
+
+.login-text {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+.login-link {
+  color: #00838f;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+.signup-btn {
+  background-color: #00a6b4; /* azulito del mockup */
+  color: #313233;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 2rem;
+  width: 100%;
+  max-width: 250px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-btn:hover {
+  background-color: #008d9b; /* tono más oscuro al pasar el mouse */
+}
+
+@media (max-width: 768px) {
+  .app-title {
+    font-size: 1.6rem;
+  }
+
+  .tagline, .login-text {
+    font-size: 0.85rem;
+  }
+
+  .logo {
+    width: 60%;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    padding: 1rem;
+  }
+
+  .logo {
+    width: 70%;
+  }
+
+  .signup-btn {
+    font-size: 1rem;
+    padding: 0.7rem 1.5rem;
+  }
+}
