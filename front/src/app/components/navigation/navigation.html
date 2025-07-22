@@ -1,8 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/home">
-      <img src="assets/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
-      RedSocial
+    <a class="navbar-brand" routerLink="/main">
+      <span class="d-inline-flex align-items-center">
+        <img src="assets/icon.jpg" alt="Logo" width="30" height="30" class="me-2 d-inline-block align-top">
+        Glim
+      </span>
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSocial" aria-controls="navbarSocial" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,44 +14,33 @@
     <div class="collapse navbar-collapse" id="navbarSocial">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/home" title="Inicio">
-            <i class="bi bi-house-door-fill"></i> Inicio
+          <a class="nav-link" routerLink="/main" title="Home">
+            <i class="bi bi-house-door-fill"></i> Home
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/posts" title="Explorar">
-            <i class="bi bi-compass-fill"></i> Explorar
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" title="Notificaciones">
-            <i class="bi bi-bell-fill"></i> Notificaciones
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" title="Mensajes">
-            <i class="bi bi-chat-dots-fill"></i> Mensajes
+          <a class="nav-link" routerLink="/posts" title="Explore">
+            <i class="bi bi-compass-fill"></i> Explore
           </a>
         </li>
       </ul>
 
       <form class="d-flex me-3">
-        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-        <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
       </form>
 
       <div class="dropdown">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="assets/avatar.jpg" alt="Perfil" width="24" height="24" class="rounded-circle me-2">
+          <img src="assets/icon.jpg" alt="Profile" width="24" height="24" class="rounded-circle me-2">
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" routerLink="/profile">Mi perfil</a></li>
-          <li><a class="dropdown-item disabled" href="#">Configuración</a></li>
+          <li><a class="dropdown-item" routerLink="/profile">My Profile</a></li>
+          <li><a class="dropdown-item disabled" href="#">Settings</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item disabled" href="#">Cerrar sesión</a></li>
+          <li><a class="dropdown-item disabled" href="#">Log Out</a></li>
         </ul>
       </div>
     </div>
   </div>
 </nav>
-<!-- prueba -->
