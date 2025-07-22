@@ -1,4 +1,3 @@
-// src/app/components/login/login.ts
 import { Component, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
@@ -54,4 +53,3 @@ export class Login {
       alert('Please fill in both fields.');
     }
   }
-}

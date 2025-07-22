@@ -3,12 +3,11 @@ import { RegisterService } from '../../services/register-service';
 import { Users } from '../../interfaces/registerUsers';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http'; // ✅ Importar HttpClient
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule], // ✅ Añadir HttpClientModule aquí
+  imports: [CommonModule, FormsModule], 
   templateUrl: './register.html',
   styleUrls: ['./register.css']
 })
@@ -28,7 +27,7 @@ export class RegisterComponent {
 
   register() {
     this.registerService.createUser(this.newUser).subscribe({
-      next: res => this.message = 'Successful Register!',
+      next: res => this.message = 'All Fine',
       error: err => {
         this.message = 'Error while registering the user!';
         console.error(err);
