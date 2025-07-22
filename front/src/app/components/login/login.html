@@ -1,54 +1,19 @@
-<body>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
-        <div class="form-container text-center">
-          <div class="mb-4">
-            <img
-              src="assets/glim-logo.png"
-              alt="Logo"
-              class="img-fluid"
-              style="max-height: 80px"
-            />
-          </div>
+<div class="login-container">
+  <h2>Login</h2>
 
-          <h2 class="accent mb-4">Log In</h2>
+  <form (ngSubmit)="login()">
+    <label for="email">Email:</label>
+    <input type="email" id="email" [(ngModel)]="email" name="email" required />
 
-          <form name="loginForm" novalidate>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email address</label>
-              <input
-                type="email"
-                id="email"
-                class="form-control"
-                name="email"
-                required
-              />
-            </div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" [(ngModel)]="password" name="password" required />
 
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                id="password"
-                class="form-control"
-                name="password"
-                required
-              />
-            </div>
+    <button type="submit">Log In</button>
+  </form>
 
-            <div class="d-grid mb-3">
-              <button type="submit" class="btn btn-accent">Log In</button>
-            </div>
+  <p class="message">{{ message }}</p>
 
-            <div class="text-center">
-              <a href="../forgot-password/forgot-password.html" class="accent"
-                >Forgot your password?</a
-              >
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+  <div class="links">
+    <button class="link-btn" (click)="goToForgotPassword()">Forgot your password?</button>
   </div>
-</body>
+</div>
