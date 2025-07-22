@@ -6,6 +6,7 @@ import { Login } from './components/login/login';
 import { ForgotPassword } from './components/forgot-password/forgot-password';
 import { Profile } from './components/profile/profile';
 import { PageNotFound } from './components/page-not-found/page-not-found';
+import { guestGuard } from './guards/guest-guard';
 
 export const routes: Routes = [
   { path: 'main', title: 'Main', component: MainGlim},
@@ -16,5 +17,7 @@ export const routes: Routes = [
   { path: 'profile', title: 'Profile', component: Profile },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', title: '404 | Page Not Found', component: PageNotFound }
+  { path: 'login', component: Login, canActivate: [guestGuard] },
+{ path: 'register', component: Register, canActivate: [guestGuard] },
 ];
 
