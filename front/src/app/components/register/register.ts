@@ -27,7 +27,7 @@ export class RegisterComponent {
 
   register() {
     this.registerService.createUser(this.newUser).subscribe({
-      next: res => this.message = 'Successful Register!',
+      next: res => this.message = 'All Fine',
       error: err => {
         this.message = 'Error while registering the user!';
         console.error(err);
