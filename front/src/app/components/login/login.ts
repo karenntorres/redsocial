@@ -1,35 +1,55 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import {
+  ReactiveFormsModule,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { LoginService } from '../../services/login-service';
+import { Credentials } from '../../interfaces/credentials';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
-  styleUrls: ['./login.css']
+  styleUrl: './login.css',
+  standalone: true,
+  imports: [ReactiveFormsModule, RouterLink, RouterModule],
 })
 export class Login {
-  email = '';
-  password = '';
-  message = '';
+  router = inject(Router);
+  loginService = inject(LoginService);
 
-  constructor(private router: Router) {}
+  credentialForm = new FormGroup({
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+  });
 
-  login() {
-    // Aquí podrías hacer tu lógica real de login
-    if (this.email && this.password) {
-      // Simula éxito
-      this.message = 'Login successful!';
-      // Navegar a main (opcional)
-      this.router.navigate(['/main']);
+  handleSubmit() {
+    if (this.credentialForm.valid) {
+      const email = this.credentialForm.value.email!;
+      const password = this.credentialForm.value.password!;
+
+      const credentials: Credentials = { email, password };
+
+      this.loginService.login(credentials).subscribe((response: any) => {
+        if (response.result === 'fine') {
+          localStorage.setItem('token', response.data);
+
+          const decoded: any = this.loginService.decodeToken(response.data);
+          console.log('Decoded token:', decoded);
+
+          if (decoded.rol === 'admin') {
+            this.router.navigateByUrl('/profile');
+          } else {
+            this.router.navigateByUrl('/main-glim');
+          }
+        } else {
+          alert('Login failed: ' + response.message);
+        }
+      });
     } else {
-      this.message = 'Please enter email and password.';
+      alert('Please fill in both fields.');
     }
   }
-
-  goToForgotPassword() {
-    this.router.navigate(['/forgot-password']);
-  }
-}
