@@ -8,14 +8,12 @@ import { Profile } from './components/profile/profile';
 import { PageNotFound } from './components/page-not-found/page-not-found';
 
 export const routes: Routes = [
-  { path: 'main', title: 'Main', component: MainGlim},
-  { path: 'posts', title: 'Explorar', component: Posts }, // Same FEED 
-  { path: 'register', title: 'Register', component: RegisterComponent},
-  { path: 'login', title: 'Login', component: Login},
-  { path: 'forgot-password', title: 'Forgot-password', component: ForgotPassword},
+  { path: 'main', title: 'Main', component: MainGlim },
+  { path: 'posts', title: 'Explorar', component: Posts },
+  { path: 'register', title: 'Register', component: RegisterComponent },
+  { path: 'login', title: 'Login', component: Login },
+  { path: 'forgot-password', title: 'Forgot-password', component: ForgotPassword },
   { path: 'profile', title: 'Profile', component: Profile },
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', title: '404 | Page Not Found', component: PageNotFound }
 ];
-
-//comment 

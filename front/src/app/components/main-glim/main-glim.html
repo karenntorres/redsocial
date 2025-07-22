@@ -1,17 +1,14 @@
-
 <div class="main-container">
-
   <img src="../assets/icon.jpg" alt="Glim Logo" class="logo" />
 
   <p class="tagline">SHARE A GLIM OF YOUR DAY</p>
 
   <h6 class="login-text">
     Already Registered?
-    <a routerLink="/login" class="login-link">Log in here.</a>
+    <a class="login-link" (click)="onLoginClick()">Log in here.</a>
   </h6>
 
   <button type="button" (click)="onSignUpClick()" class="signup-btn">
     Sign Up
   </button>
-
 </div>
