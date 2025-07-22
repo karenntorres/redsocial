@@ -9,35 +9,70 @@
     </header>
     
     <main>
-        <form class="m-5">
+        <form class="m-5" (ngSubmit)="register()" #form="ngForm">
             
             <div class="col-md-6 container-fluid mt-2">
-                <label for="text" class="form-label fw-bold">Name</label>
-                <input type="text" class="form-control" placeholder="Type your full name here"/>
+                <label for="name" class="form-label fw-bold">Name</label>
+                <input type="text" 
+                class="form-control" 
+                placeholder="Type your full name here"
+                id="name"
+                name="name"
+                [(ngModel)]="newUser.name"
+                required                
+                />
             </div>
             
             <div class="col-md-6 container-fluid mt-2 ">
-                <label for="text" class="form-label fw-bold">Username</label>
-                <input type="text" class="form-control" placeholder="Choose an username longer than 5 characters" />
+                <label for="username" class="form-label fw-bold">Username</label>
+                <input type="text" 
+                class="form-control" 
+                placeholder="Choose an username longer than 5 characters" 
+                id="username"
+                name="username"
+                [(ngModel)]="newUser.username"
+                required
+                />
             </div>            
 
             <div class="col-md-6 container-fluid mt-2">
-                <label for="inputEmail4" class="form-label fw-bold">Email</label>
-                <input type="email" class="form-control" id="inputEmail4" 
+                <label for="email" class="form-label fw-bold">Email</label>
+                <input type="email" 
+                class="form-control" 
                 placeholder="Type your email address here"
+                id="email"
+                name="email"
+                [(ngModel)]="newUser.email"
+                required
                 />
+
             </div>
             <div class="col-md-6 container-fluid mt-2">
-                <label for="inputPassword4" class="form-label fw-bold">Password</label>
-                <input type="password" class="form-control" id="inputPassword4" 
+                <label for="password" class="form-label fw-bold">Password</label>
+                <input type="password" 
+                class="form-control" 
                 placeholder="Choose a password, at least 8 characters"
+                id="password"
+                name="password"
+                [(ngModel)]="newUser.password"
+                required
+
                 />
             </div>
             
             <div class="col-12 text-center mt-4 container-fluid">
-                 <label for="text" class="form-label fw-bold">Upload your profile picture:</label> <br>
+                 <label for="pfPicture" class="form-label fw-bold">Upload your profile picture:</label> <br>
                  <br>
-                 <input type="file" accept="image/*">
+                 <input type="file" 
+                 accept="image/*"
+                 (change)="onFileSelected($event)"
+                 />
+
+                 <!-- image previous view -->
+            <div class="text-center mt-3">
+            <img *ngIf="imagePreview" [src]="imagePreview" alt="previous view" width="120" style="border-radius: 6px;">
+            </div>
+                 
             </div>
 
             <div class="col-12 text-center mt-5 container-fluid">
@@ -45,7 +80,11 @@
             </div>
         </form>
 
+            <!--to show message-->
+
+         <div *ngIf="message" class="text-center mt-3">
+            <strong>{{ message }}</strong>
+         </div>
+
     </main>
 </body>
-
-
