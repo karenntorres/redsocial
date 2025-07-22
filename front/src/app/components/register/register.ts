@@ -3,12 +3,11 @@ import { RegisterService } from '../../services/register-service';
 import { Users } from '../../interfaces/registerUsers';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http'; // ✅ Importar HttpClient
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule], // ✅ Añadir HttpClientModule aquí
+  imports: [CommonModule, FormsModule], 
   templateUrl: './register.html',
   styleUrls: ['./register.css']
 })

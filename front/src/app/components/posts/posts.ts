@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
+import { Navigation } from '../navigation/navigation';
 
 interface Post {
   id: number;
@@ -13,7 +15,7 @@ interface Post {
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Navigation, RouterOutlet],
   templateUrl: './posts.html',
   styleUrl: './posts.css'
 })
