@@ -1,7 +1,7 @@
 
 <div class="main-container">
 
-  <img src="assets/icon.jpg" alt="Glim Logo" class="logo" />
+  <img src="../assets/icon.jpg" alt="Glim Logo" class="logo" />
 
   <p class="tagline">SHARE A GLIM OF YOUR DAY</p>
 
@@ -10,5 +10,8 @@
     <a routerLink="/login" class="login-link">Log in here.</a>
   </h6>
 
-  <button class="signup-btn" routerLink="/register">Sign Up</button>
+  <button type="button" (click)="onSignUpClick()" class="signup-btn">
+    Sign Up
+  </button>
+
 </div>

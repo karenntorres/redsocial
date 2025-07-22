@@ -14,7 +14,7 @@ export const routes: Routes = [
   { path: 'login', title: 'Login', component: Login},
   { path: 'forgot-password', title: 'Forgot-password', component: ForgotPassword},
   { path: 'profile', title: 'Profile', component: Profile },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', title: '404 | Page Not Found', component: PageNotFound }
 ];
 
