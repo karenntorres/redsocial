@@ -54,6 +54,3 @@ export class Login {
     }
   }
 }
-
-
-// comentario prueba 
