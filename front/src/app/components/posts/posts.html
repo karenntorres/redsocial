@@ -1,16 +1,35 @@
 <app-navigation></app-navigation>
 
-<div class="container" style="font-family: 'Roboto', sans-serif; max-width: 800px;">
+<div
+  class="container"
+  style="font-family: 'Roboto', sans-serif; max-width: 800px"
+>
   <!-- Crear nueva publicación -->
   <div class="mb-4 p-4 border rounded shadow-sm bg-white">
-    <textarea [(ngModel)]="nuevaPublicacion"
-              class="form-control mb-3"
-              rows="3"
-              placeholder="Share a glim of your day"></textarea>
+    <textarea
+      [(ngModel)]="nuevaPublicacion"
+      class="form-control mb-3"
+      rows="3"
+      placeholder="Share a glim of your day"
+    ></textarea>
 
-    <input type="file" (change)="onImageSelected($event)" class="form-control mb-3" />
+    <input
+      type="file"
+      (change)="onImageSelected($event)"
+      class="form-control mb-3"
+    />
 
-    <button class="btn" style="background-color: #0093ab; color: white;" (click)="publicar()">
+    <input
+      type="file"
+      (change)="onImageSelected($event)"
+      class="form-control mb-3"
+    />
+
+    <button
+      class="btn"
+      style="background-color: #0093ab; color: white"
+      (click)="publicar()"
+    >
       Post
     </button>
   </div>
@@ -20,10 +39,18 @@
     <p>No hay publicaciones todavía. ¡Sé el primero en compartir algo! ✨</p>
   </div>
 
-  <div *ngFor="let post of posts; trackBy: trackByPostId" class="mb-4 p-4 border rounded shadow-sm bg-white">
+  <div
+    *ngFor="let post of posts; trackBy: trackByPostId"
+    class="mb-4 p-4 border rounded shadow-sm bg-white"
+  >
     <p class="mb-1 fw-bold">Usuario</p>
     <p class="mb-3">{{ post.contenido }}</p>
 
-    <img *ngIf="post.imagen" [src]="post.imagen" alt="Imagen" class="img-fluid mb-3" />
+    <img
+      *ngIf="post.imagen"
+      [src]="post.imagen"
+      alt="Imagen"
+      class="img-fluid mb-3"
+    />
   </div>
 </div>
