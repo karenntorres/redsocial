@@ -1,66 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { Navigation } from '../navigation/navigation';
-
-interface Post {
-  id: number;
-  usuario: string;
-  contenido: string;
-  comentarios: string[];
-  nuevosComentarios: string[];
-}
+import { Posts as PostModel } from '../../interfaces/posts';
+import { PostService } from '../../services/posts-service';
 
 @Component({
   selector: 'app-posts',
   standalone: true,
   imports: [CommonModule, FormsModule, Navigation, RouterOutlet],
   templateUrl: './posts.html',
-  styleUrl: './posts.css'
+  styleUrls: ['./posts.css']
 })
-export class Posts {
+export class Posts implements OnInit {
   nuevaPublicacion: string = '';
-  private contadorId = 1;
+  imagenSeleccionada: File | null = null;
+  posts: PostModel[] = [];
 
-  posts: Post[] = [];
+  constructor(private postService: PostService) {}
 
-  publicar() {
-    const contenido = this.nuevaPublicacion.trim();
-    if (contenido) {
-      const nuevoPost: Post = {
-        id: this.contadorId++,
-        usuario: 'Usuario Actual',
-        contenido,
-        comentarios: [],
-        nuevosComentarios: ['']
-      };
-      this.posts = [nuevoPost, ...this.posts]; // ← Esto evita redibujar por referencia
-      this.nuevaPublicacion = '';
+  ngOnInit(): void {
+    this.postService.getPosts().subscribe({
+      next: (data: PostModel[]) => {
+        this.posts = data;
+      },
+      error: (err: unknown) => {
+        console.error('Error al cargar posts:', err);
+      }
+    });
+  }
+
+  onImageSelected(event: any): void {
+    const archivo = event.target.files[0];
+    this.imagenSeleccionada = archivo ? archivo : null;
+  }
+
+  publicar(): void {
+    if (!this.nuevaPublicacion.trim()) return;
+
+    const formData = new FormData();
+    formData.append('contenido', this.nuevaPublicacion.trim());
+
+    if (this.imagenSeleccionada) {
+      formData.append('imagen', this.imagenSeleccionada);
     }
+
+    this.postService.createPost(formData).subscribe({
+      next: (respuesta: PostModel) => {
+        this.posts = [respuesta, ...this.posts];
+        this.nuevaPublicacion = '';
+        this.imagenSeleccionada = null;
+      },
+      error: (err: unknown) => {
+        console.error('Error al crear el post:', err);
+      }
+    });
   }
 
-  agregarCampoComentario(post: Post) {
-    post.nuevosComentarios = [...post.nuevosComentarios, '']; // fuerza el cambio por referencia
-  }
-
-  comentar(post: Post, index: number) {
-    const texto = post.nuevosComentarios[index]?.trim();
-    if (texto) {
-      post.comentarios = [...post.comentarios, texto];
-      post.nuevosComentarios[index] = '';
-    }
-  }
-
-  agregarCampoComentarioAlPublicar() {
-    // Lógica opcional si quieres hacer algo similar al publicar
-  }
-
-  trackByPostId(index: number, post: Post) {
-    return post.id;
-  }
-
-  trackByIndex(index: number): number {
+  trackByPostId(index: number): number {
     return index;
   }
 }
