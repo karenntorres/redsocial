@@ -1,27 +1,48 @@
 import { Component } from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './forgot-password.html',
-  styleUrls: ['./forgot-password.css']
+  styleUrls: ['./forgot-password.css'],
 })
 export class ForgotPassword {
-  email: string = '';
+  recoverForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+  });
+
   message: string = '';
 
-  onSubmit() {
-    if (!this.email) {
-      this.message = 'Please enter a valid email.';
-      return;
-    }
+  constructor(private httpClient: HttpClient) {}
 
-    // Aquí podrías hacer una llamada a tu servicio en el futuro
-    // Por ahora solo muestra el mensaje de éxito simulado
-    this.message = `A reset link has been sent to ${this.email}.`;
+  handleRecover() {
+    if (this.recoverForm.valid) {
+      const email = this.recoverForm.value.email;
+      this.httpClient
+        .post<any>('http://localhost:3001/users/forgot-password', { email })
+        .subscribe({
+          next: (res) => {
+            this.message = res.message;
+          },
+          error: (err) => {
+            if (err.status === 404) {
+              this.message = 'Email address not found.';
+            } else {
+              this.message = 'An error occurred while sending the email.';
+            }
+            console.error(err);
+          },
+        });
+    }
   }
 }

@@ -13,14 +13,13 @@
 
         <h2 class="text-center accent mb-4">Log In</h2>
 
-        <form (ngSubmit)="login()">
+        <form [formGroup]="credentialForm" (ngSubmit)="handleSubmit()">
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input
-              [(ngModel)]="email"
-              name="email"
               type="email"
               id="email"
+              formControlName="email"
               class="form-control"
               required
             />
@@ -29,10 +28,9 @@
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input
-              [(ngModel)]="password"
-              name="password"
               type="password"
               id="password"
+              formControlName="password"
               class="form-control"
               required
             />
@@ -43,7 +41,13 @@
           </div>
 
           <div class="text-center">
-            <a (click)="goToForgotPassword()" class="accent" style="cursor: pointer;">Forgot your password?</a>
+            <a
+              [routerLink]="['/forgot-password']"
+              class="accent"
+              style="cursor: pointer"
+            >
+              Forgot your password?
+            </a>
           </div>
 
           <div *ngIf="message" class="text-center mt-3 text-danger">
