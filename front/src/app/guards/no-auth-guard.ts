@@ -1,14 +1,14 @@
-import { CanActivateFn, UrlTree } from '@angular/router';
 import { inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 
-export const noAuthGuard: CanActivateFn = (route, state): boolean | UrlTree => {
+export const noAuthGuard: CanActivateFn = () => {
   const router = inject(Router);
   const token = localStorage.getItem('token');
 
   if (token) {
-    return router.createUrlTree(['/posts']);
-  } else {
-    return true;
+    router.navigateByUrl('/posts');
+    return false;
   }
+
+  return true;
 };
