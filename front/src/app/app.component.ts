@@ -4,10 +4,11 @@ import { Navigation } from './components/navigation/navigation';
 
 @Component({
   selector: 'app-root',
+  standalone: true, 
   imports: [RouterOutlet, Navigation],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class App {
+export class AppComponent {
   protected title = 'front';
 }
