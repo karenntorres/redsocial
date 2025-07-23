@@ -1,55 +1,58 @@
 import { Component } from '@angular/core';
-import { RegisterService } from '../../services/register-service';
-import { Users } from '../../interfaces/registerUsers';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RegisterService } from '../../services/register-service';
+import { ApiResponse } from '../../interfaces/api-response';
+
 
 @Component({
   selector: 'app-register',
-  standalone: true,
   imports: [CommonModule, FormsModule], 
   templateUrl: './register.html',
   styleUrls: ['./register.css']
 })
-export class RegisterComponent {
-  newUser: Users = {
-    name: '',
-    email: '',
-    password: '',
-    username: '',
-    pfPicture: ''
-  };
+export class Register {
+    name= '';
+    email= '';
+    password= '';
+    username= '';
+    pfPicture= '';
+ 
 
-  message = '';
-  imagePreview: string = '';
+  constructor(private registerService: RegisterService, private router: Router) {}
+  handleSubmit(): void {
+    if(!this.name || !this.email || !this.password || !this.username || !this.pfPicture){
+      alert('Please complete every field');
+      return;
+    }
 
-  constructor(private registerService: RegisterService) {}
+    this.registerService.createUser(this.name, this.email, this.password, this.username, this.pfPicture).subscribe({
+      next: (res: ApiResponse)=>{
+        if(res.result === 'All Fine'){
+          alert('User has been sucessfully registered ');
+          this.router.navigate(['/login']);
+        }else{
+          alert(res.message || 'User could not be found'); 
+        }
+      },
 
-  register() {
-    this.registerService.createUser(this.newUser).subscribe({
-      next: res => this.message = 'All Fine',
-      error: err => {
-        this.message = 'Error while registering the user!';
-        console.error(err);
+      error: (err)=>{
+        console.log('Error in the server', err);
+        alert('Unexpected error, try again');
       }
+
     });
   }
 
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
+    onFileSelected(event: Event): void {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (file) {
       const reader = new FileReader();
-
       reader.onload = () => {
-        const base64 = reader.result as string;
-        this.newUser.pfPicture = base64;
-        this.imagePreview = base64;
-        console.log('codified image:', base64);
+        this.pfPicture = reader.result as string;
       };
-
       reader.readAsDataURL(file);
-    }
-  }
+      }
+    } 
 }
