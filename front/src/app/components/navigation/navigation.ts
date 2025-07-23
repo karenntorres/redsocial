@@ -1,11 +1,25 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [RouterLink],
   templateUrl: './navigation.html',
-  styleUrls: ['./navigation.css']
+  styleUrls: ['./navigation.css'],
+  imports: [CommonModule, RouterLink],
 })
-export class Navigation {}
+export class Navigation {
+  constructor(private router: Router) {}
+
+  get isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/login');
+  }
+}
+
+// AÑADÍ LOG OUT . K 

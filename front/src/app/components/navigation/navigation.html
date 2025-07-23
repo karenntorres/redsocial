@@ -33,13 +33,15 @@
         <a class="btn dropdown-toggle text-dark bg-white border-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <img src="assets/glim-logo.png" alt="Profile" width="50" height="50" class="rounded-circle me-2">
         </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" href="/profile">My Profile</a></li>
-          <li><a class="dropdown-item disabled" href="#">Settings</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item disabled" href="#">Log Out</a></li>
-        </ul>
+      <ul class="dropdown-menu dropdown-menu-end">
+  <li><a class="dropdown-item" href="/profile">My Profile</a></li>
+  <li><a class="dropdown-item disabled" href="#">Settings</a></li>
+  <li><hr class="dropdown-divider"></li>
+  <li><button class="dropdown-item" (click)="logout()">Log Out</button></li>
+      </ul>
       </div>
     </div>
   </div>
 </nav>
+
+// MODIFIQUÉ EL BOTÓN DE LOG OUT - K 
