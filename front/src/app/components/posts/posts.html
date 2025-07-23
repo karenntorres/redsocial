@@ -1,89 +1,59 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
-import { Navigation } from '../navigation/navigation';
-import { Posts as PostModel } from '../../interfaces/posts';
-import { PostService } from '../../services/posts-service';
+<div
+  class="container"
+  style="font-family: 'Roboto', sans-serif; max-width: 800px"
+>
+  <!-- Crear nueva publicación -->
+  <div class="mb-4 p-4 border rounded shadow-sm bg-white">
+    <textarea
+      [(ngModel)]="nuevaPublicacion"
+      class="form-control mb-3"
+      rows="3"
+      placeholder="Share a glim of your day"
+    ></textarea>
 
-@Component({
-  selector: 'app-posts',
-  standalone: true,
-  imports: [CommonModule, FormsModule, Navigation, RouterOutlet],
-  templateUrl: './posts.html',
-  styleUrls: ['./posts.css']
-})
-export class Posts implements OnInit {
-  nuevaPublicacion: string = '';
-  imagenSeleccionada: File | null = null;
-  posts: PostModel[] = [];
-  cargando: boolean = false; // evita doble clic
+    <input
+      type="file"
+      (change)="onImageSelected($event)"
+      class="form-control mb-3"
+    />
 
-  constructor(private postService: PostService) {}
+    <button
+      class="btn"
+      style="background-color: #0093ab; color: white"
+      (click)="publicar()"
+      [disabled]="cargando"
+    >
+      Post
+    </button>
+  </div>
 
-  ngOnInit(): void {
-    this.postService.getPosts().subscribe({
-      next: (data: PostModel[]) => {
-        this.posts = Array.isArray(data) ? data : [];
-      },
-      error: (err: unknown) => {
-        console.error('Error al cargar posts:', err);
-      }
-    });
-  }
+  <!-- Lista de publicaciones -->
+  <div *ngIf="posts.length === 0" class="text-center text-muted mb-5">
+    <p>There are no posts yet. Be the first to share something!</p>
+  </div>
 
-  onImageSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const archivo = input.files?.[0];
-    this.imagenSeleccionada = archivo ?? null;
-  }
+  <div
+    *ngFor="let post of posts; trackBy: trackByPostId"
+    class="mb-4 p-4 border rounded shadow-sm bg-white position-relative"
+  >
+    <!-- Botón eliminar con icono de Bootstrap -->
+    <button
+      class="btn btn-sm"
+      (click)="eliminar(post)"
+      [disabled]="cargando"
+      style="position: absolute; top: 10px; right: 10px; color: #0093ab"
+    >
+      <i class="bi bi-trash-fill"></i>
+    </button>
 
-  publicar(): void {
-    if (this.cargando || !this.nuevaPublicacion.trim()) return;
+    <p class="mb-1 fw-bold">Usuario</p>
+    <p class="mb-3">{{ post.contenido }}</p>
 
-    this.cargando = true;
-    const formData = new FormData();
-    formData.append('contenido', this.nuevaPublicacion.trim());
-
-    if (this.imagenSeleccionada) {
-      formData.append('imagen', this.imagenSeleccionada);
-    }
-
-    this.postService.createPost(formData).subscribe({
-      next: (respuesta: any) => {
-        const nuevoPost: PostModel = respuesta?.data;
-        this.posts = [nuevoPost, ...this.posts];
-        this.nuevaPublicacion = '';
-        this.imagenSeleccionada = null;
-
-        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
-        if (fileInput) fileInput.value = '';
-        this.cargando = false;
-      },
-      error: (err: unknown) => {
-        console.error('Error al crear el post:', err);
-        this.cargando = false;
-      }
-    });
-  }
-
-  eliminar(post: PostModel): void {
-    if (this.cargando || !post._id) return;
-
-    this.cargando = true;
-    this.postService.deletePost(post._id).subscribe({
-      next: () => {
-        this.posts = this.posts.filter(p => p._id !== post._id);
-        this.cargando = false;
-      },
-      error: (err: unknown) => {
-        console.error('Error al eliminar el post:', err);
-        this.cargando = false;
-      }
-    });
-  }
-
-  trackByPostId(index: number, post: PostModel): string {
-    return post._id;
-  }
-}
+    <img
+      *ngIf="post.imagen"
+      [src]="post.imagen"
+      alt="Imagen"
+      class="img-fluid mb-3"
+    />
+  </div>
+</div>

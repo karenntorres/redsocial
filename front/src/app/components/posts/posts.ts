@@ -17,7 +17,7 @@ export class Posts implements OnInit {
   nuevaPublicacion: string = '';
   imagenSeleccionada: File | null = null;
   posts: PostModel[] = [];
-  cargando: boolean = false; // evita doble clic
+  cargando: boolean = false;
 
   constructor(private postService: PostService) {}
 
@@ -42,6 +42,19 @@ export class Posts implements OnInit {
     if (this.cargando || !this.nuevaPublicacion.trim()) return;
 
     this.cargando = true;
+
+    const tempId = 'temp-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6);
+
+    const postTemp: PostModel = {
+      _id: tempId,
+      contenido: this.nuevaPublicacion.trim(),
+      imagen: this.imagenSeleccionada
+        ? URL.createObjectURL(this.imagenSeleccionada)
+        : undefined
+    };
+
+    this.posts = [postTemp, ...this.posts];
+
     const formData = new FormData();
     formData.append('contenido', this.nuevaPublicacion.trim());
 
@@ -52,7 +65,12 @@ export class Posts implements OnInit {
     this.postService.createPost(formData).subscribe({
       next: (respuesta: any) => {
         const nuevoPost: PostModel = respuesta?.data;
-        this.posts = [nuevoPost, ...this.posts];
+
+        this.posts = [
+          nuevoPost,
+          ...this.posts.filter(p => p._id !== postTemp._id)
+        ];
+
         this.nuevaPublicacion = '';
         this.imagenSeleccionada = null;
 
@@ -62,15 +80,24 @@ export class Posts implements OnInit {
       },
       error: (err: unknown) => {
         console.error('Error al crear el post:', err);
+        this.posts = this.posts.filter(p => p._id !== postTemp._id);
         this.cargando = false;
       }
     });
   }
 
   eliminar(post: PostModel): void {
-    if (this.cargando || !post._id) return;
+    if (this.cargando || !post || typeof post._id !== 'string') return;
+
+    console.log('Eliminar solicitado para ID:', post._id);
+
+    if (post._id.startsWith('temp')) {
+      this.posts = this.posts.filter(p => p._id !== post._id);
+      return;
+    }
 
     this.cargando = true;
+
     this.postService.deletePost(post._id).subscribe({
       next: () => {
         this.posts = this.posts.filter(p => p._id !== post._id);
@@ -84,6 +111,6 @@ export class Posts implements OnInit {
   }
 
   trackByPostId(index: number, post: PostModel): string {
-    return post._id;
+    return post._id ?? index.toString();
   }
 }
