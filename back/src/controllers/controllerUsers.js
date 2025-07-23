@@ -7,10 +7,10 @@ import nodemailer from "nodemailer";
 const controllerUsers = {
   createUser: async (req, res) => {
     try {
-      const { name, email, password, username } = req.body;
+      const { name, email, password, username, pfPicture } = req.body;
 
       // Validar imagen
-      if (!req.file) {
+      if (!pfPicture) {
         return res.status(400).json({
           result: "mistake",
           message: "Profile picture is required",
@@ -27,7 +27,7 @@ const controllerUsers = {
         email,
         password: passwordEncrypted,
         username,
-        pfPicture: req.file.filename,
+        pfPicture,
       });
 
       const createdUser = await newUser.save();
