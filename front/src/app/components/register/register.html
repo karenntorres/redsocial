@@ -1,15 +1,13 @@
-<body class="container-fluid">
-
     <header class="container-fluid">
         <h1 class="arriba text-center mt-3">Create New</h1>
         <h1 class="abajo text-center">Account</h1>
         <span>
-        <h6 class="text-center mt-3 fw-bold"> Already Registered? Log in <a href="">here.</a> </h6>
+        <h6 class="text-center mt-3 fw-bold"> Already Registered? Log in <a routerLink="/login">here.</a> </h6>
         </span>           
     </header>
     
     <main>
-        <form class="m-5" (ngSubmit)="register()" #form="ngForm">
+        <form class="m-5" (ngSubmit)="handleSubmit()" #form="ngForm">
             
             <div class="col-md-6 container-fluid mt-2">
                 <label for="name" class="form-label fw-bold">Name</label>
@@ -18,7 +16,7 @@
                 placeholder="Type your full name here"
                 id="name"
                 name="name"
-                [(ngModel)]="newUser.name"
+                [(ngModel)]="name"
                 required                
                 />
             </div>
@@ -30,7 +28,7 @@
                 placeholder="Choose an username longer than 5 characters" 
                 id="username"
                 name="username"
-                [(ngModel)]="newUser.username"
+                [(ngModel)]="username"
                 required
                 />
             </div>            
@@ -42,7 +40,7 @@
                 placeholder="Type your email address here"
                 id="email"
                 name="email"
-                [(ngModel)]="newUser.email"
+                [(ngModel)]="email"
                 required
                 />
 
@@ -54,7 +52,7 @@
                 placeholder="Choose a password, at least 8 characters"
                 id="password"
                 name="password"
-                [(ngModel)]="newUser.password"
+                [(ngModel)]="password"
                 required
 
                 />
@@ -64,15 +62,14 @@
                  <label for="pfPicture" class="form-label fw-bold">Upload your profile picture:</label> <br>
                  <br>
                  <input type="file" 
+                 id="pfPicture"
                  accept="image/*"
                  (change)="onFileSelected($event)"
-                 />
-
-                 <!-- image previous view -->
-            <div class="text-center mt-3">
-            <img *ngIf="imagePreview" [src]="imagePreview" alt="previous view" width="120" style="border-radius: 6px;">
+                 />                 
             </div>
-                 
+
+            <div *ngIf="pfPicture" class="text-center mt-3">
+            <img [src]="pfPicture" alt="Profile Preview" width="120" class="rounded-circle border" />
             </div>
 
             <div class="col-12 text-center mt-5 container-fluid">
@@ -80,11 +77,5 @@
             </div>
         </form>
 
-            <!--to show message-->
-
-         <div *ngIf="message" class="text-center mt-3">
-            <strong>{{ message }}</strong>
-         </div>
-
     </main>
-</body>
+ 
