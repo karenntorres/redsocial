@@ -1,5 +1,3 @@
-<app-navigation></app-navigation>
-
 <div
   class="container"
   style="font-family: 'Roboto', sans-serif; max-width: 800px"
@@ -23,6 +21,7 @@
       class="btn"
       style="background-color: #0093ab; color: white"
       (click)="publicar()"
+      [disabled]="cargando"
     >
       Post
     </button>
@@ -30,13 +29,23 @@
 
   <!-- Lista de publicaciones -->
   <div *ngIf="posts.length === 0" class="text-center text-muted mb-5">
-    <p>No hay publicaciones todavía. ¡Sé el primero en compartir algo! ✨</p>
+    <p>There are no posts yet. Be the first to share something!</p>
   </div>
 
   <div
     *ngFor="let post of posts; trackBy: trackByPostId"
-    class="mb-4 p-4 border rounded shadow-sm bg-white"
+    class="mb-4 p-4 border rounded shadow-sm bg-white position-relative"
   >
+    <!-- Botón eliminar con icono de Bootstrap -->
+    <button
+      class="btn btn-sm"
+      (click)="eliminar(post)"
+      [disabled]="cargando"
+      style="position: absolute; top: 10px; right: 10px; color: #0093ab"
+    >
+      <i class="bi bi-trash-fill"></i>
+    </button>
+
     <p class="mb-1 fw-bold">Usuario</p>
     <p class="mb-3">{{ post.contenido }}</p>
 
