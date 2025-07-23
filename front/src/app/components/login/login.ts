@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.html',
-  styleUrl: './login.css',
+ styleUrls: ['./login.css'],
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink, RouterModule],
 })
