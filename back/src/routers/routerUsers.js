@@ -8,7 +8,7 @@ import { imagesStorage } from '../middlewares/uploadImages.js';
 const routerUsers = Router();
 
 // 👤 User routes
-routerUsers.post('/', imagesStorage, controllerUsers.createUser);
+routerUsers.post('/', controllerUsers.createUser);
 routerUsers.get('/:id', controllerUsers.readUser);
 routerUsers.get('/', controllerUsers.readAllUsers);
 routerUsers.put('/:id', controllerUsers.updateUser);
