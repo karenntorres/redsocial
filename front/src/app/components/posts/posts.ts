@@ -15,7 +15,7 @@ import { PostService } from '../../services/posts-service';
 })
 export class Posts implements OnInit {
   nuevaPublicacion: string = '';
-  nuevaImagen: string = '';
+  imagenSeleccionada: File | null = null;
   posts: PostModel[] = [];
 
   constructor(private postService: PostService) {}
@@ -31,24 +31,31 @@ export class Posts implements OnInit {
     });
   }
 
-  publicar(): void {
-    const nuevoPost: PostModel = {
-      contenido: this.nuevaPublicacion.trim(),
-      imagen: this.nuevaImagen || ''
-    };
+  onImageSelected(event: any): void {
+    const archivo = event.target.files[0];
+    this.imagenSeleccionada = archivo ? archivo : null;
+  }
 
-    if (nuevoPost.contenido) {
-      this.postService.createPost(nuevoPost).subscribe({
-        next: (respuesta: PostModel) => {
-          this.posts = [respuesta, ...this.posts];
-          this.nuevaPublicacion = '';
-          this.nuevaImagen = '';
-        },
-        error: (err: unknown) => {
-          console.error('Error al crear el post:', err);
-        }
-      });
+  publicar(): void {
+    if (!this.nuevaPublicacion.trim()) return;
+
+    const formData = new FormData();
+    formData.append('contenido', this.nuevaPublicacion.trim());
+
+    if (this.imagenSeleccionada) {
+      formData.append('imagen', this.imagenSeleccionada);
     }
+
+    this.postService.createPost(formData).subscribe({
+      next: (respuesta: PostModel) => {
+        this.posts = [respuesta, ...this.posts];
+        this.nuevaPublicacion = '';
+        this.imagenSeleccionada = null;
+      },
+      error: (err: unknown) => {
+        console.error('Error al crear el post:', err);
+      }
+    });
   }
 
   trackByPostId(index: number): number {

@@ -8,10 +8,7 @@
               rows="3"
               placeholder="Share a glim of your day"></textarea>
 
-    <input [(ngModel)]="nuevaImagen"
-           type="text"
-           class="form-control mb-3"
-           placeholder="Image URL (optional)" />
+    <input type="file" (change)="onImageSelected($event)" class="form-control mb-3" />
 
     <button class="btn" style="background-color: #0093ab; color: white;" (click)="publicar()">
       Post
