@@ -30,7 +30,7 @@ export class Register {
     this.registerService.createUser(this.name, this.email, this.password, this.username, this.pfPicture).subscribe({
       next: (res: ApiResponse)=>{
         if(res.result === 'All Fine'){
-          alert('User has been sucessfully registered ');
+          alert('User has been sucessfully registered');
           this.router.navigate(['/login']);
         }else{
           alert(res.message || 'User could not be found'); 
