@@ -8,7 +8,8 @@ import routerLogin from './routers/routerLogin.js';
 
 const servidor = express();
 servidor.use(morgan('dev'));
-servidor.use(express.json());
+servidor.use(express.json({ limit: '10mb' }));
+servidor.use(express.urlencoded({ extended: true, limit: '10mb' }));
 servidor.use(cors());
 
 // Rutas
