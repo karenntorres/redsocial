@@ -41,7 +41,7 @@ export class Login {
           console.log('Decoded token:', decoded);
 
           if (decoded.rol === 'admin') {
-            this.router.navigateByUrl('/profile');
+            this.router.navigateByUrl('/posts');
           } else {
             this.router.navigateByUrl('/main-glim');
           }
@@ -53,5 +53,4 @@ export class Login {
       alert('Please fill in both fields.');
     }
   }
-  }
-  
+}
