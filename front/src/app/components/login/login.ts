@@ -14,12 +14,11 @@ import { RouterModule } from '@angular/router';
   selector: 'app-login',
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
-  standalone: true,
   imports: [ReactiveFormsModule, RouterLink, RouterModule],
 })
 export class Login {
   router = inject(Router);
-  loginService = inject(LoginService);
+  loginService: LoginService = inject(LoginService);
 
   message = 'Worn password or email, try again';
 
