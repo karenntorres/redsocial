@@ -20,7 +20,7 @@ export class Login {
   router = inject(Router);
   loginService: LoginService = inject(LoginService);
 
-  message = 'Worn password or email, try again';
+  message = 'Wrong password or email, try again';
 
   credentialForm = new FormGroup({
     email: new FormControl('', Validators.required),
