@@ -18,26 +18,27 @@
 
 .app-title {
   color: #00838f;
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.8rem;
+  letter-spacing: 0.5px;
 }
 
 .logo {
-  width: 50%;
-  max-width: 220px;
+  width: 60%;
+  max-width: 300px;
   height: auto;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .tagline {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #6c757d;
   margin-bottom: 2rem;
 }
 
 .login-text {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: #6c757d;
   margin-bottom: 1rem;
 }
@@ -58,10 +59,10 @@
   color: #313233;
   border: none;
   border-radius: 8px;
-  padding: 0.8rem 2rem;
+  padding: 1rem 2.2rem;
   width: 100%;
-  max-width: 250px;
-  font-size: 1rem;
+  max-width: 270px;
+  font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -73,15 +74,21 @@
 
 @media (max-width: 768px) {
   .app-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 
-  .tagline, .login-text {
-    font-size: 0.85rem;
+  .tagline,
+  .login-text {
+    font-size: 0.9rem;
   }
 
   .logo {
-    width: 60%;
+    width: 70%;
+  }
+
+  .signup-btn {
+    font-size: 1rem;
+    padding: 0.9rem 2rem;
   }
 }
 
@@ -91,11 +98,15 @@
   }
 
   .logo {
-    width: 70%;
+    width: 80%;
   }
 
   .signup-btn {
     font-size: 1rem;
-    padding: 0.7rem 1.5rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .app-title {
+    font-size: 1.6rem;
   }
 }
