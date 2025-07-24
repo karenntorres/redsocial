@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RegisterService } from '../../services/register-service';
@@ -8,7 +8,7 @@ import { ApiResponse } from '../../interfaces/api-response';
 
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, FormsModule], 
+  imports: [CommonModule, FormsModule, RouterLink], 
   templateUrl: './register.html',
   styleUrls: ['./register.css']
 })

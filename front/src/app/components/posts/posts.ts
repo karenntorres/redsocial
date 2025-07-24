@@ -113,5 +113,6 @@ export class Posts implements OnInit {
   trackByPostId(index: number, post: PostModel): string {
     return post._id ?? index.toString();
   }
+
 }
 
