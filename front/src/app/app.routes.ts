@@ -10,7 +10,7 @@ import { authGuard } from './guards/auth-guard';
 import { noAuthGuard } from './guards/no-auth-guard';
 
 export const routes: Routes = [
-  { path: 'main', title: 'Main', component: MainGlim }, // PUBLIC
+  { path: 'main', title: 'Main', component: MainGlim }, // public
   {
     path: 'posts',
     title: 'Explorar',
@@ -22,18 +22,19 @@ export const routes: Routes = [
     title: 'Register',
     component: Register,
     canActivate: [noAuthGuard],
-  }, // PUBLIC
+  }, // public
   {
     path: 'login',
     title: 'Login',
     component: Login,
     canActivate: [noAuthGuard],
-  }, // PUBLIC
+  }, // public
   {
     path: 'forgot-password',
     title: 'Forgot-password',
     component: ForgotPassword,
-  }, // PUBLIC
+    canActivate: [noAuthGuard],
+  }, // public
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', title: '404 | Page Not Found', component: PageNotFound },
 ];
