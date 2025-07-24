@@ -2,7 +2,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Credentials } from '../interfaces/credentials';
-import { jwtDecode } from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +17,6 @@ export class LoginService {
   }
 
   decodeToken(token: string): any {
-    return jwtDecode(token);
+    return jwt_decode(token);
   }
 }
