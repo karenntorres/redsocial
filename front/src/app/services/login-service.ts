@@ -13,7 +13,7 @@ export class LoginService {
   httpClient = inject(HttpClient);
 
   login(credentials: Credentials) {
-    return this.httpClient.post('http://localhost:3001/login', credentials);
+    return this.httpClient.post('http://localhost:3001/loginUser', credentials);
   }
 
   decodeToken(token: string): any {
