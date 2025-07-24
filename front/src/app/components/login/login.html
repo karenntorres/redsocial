@@ -50,7 +50,7 @@
             </a>
           </div>
 
-          <div *ngIf="message" class="text-center mt-3 text-danger">
+          <div [hidden]="!message" class="text-center mt-3 text-danger">
             {{ message }}
           </div>
         </form>
