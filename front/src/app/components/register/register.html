@@ -2,7 +2,14 @@
         <h1 class="arriba text-center mt-3">Create New</h1>
         <h1 class="abajo text-center">Account</h1>
         <span>
-        <h6 class="text-center mt-3 fw-bold"> Already Registered? Log in <a routerLink="/login">here.</a> </h6>
+        <h6 class="text-center mt-3 fw-bold"> Already Registered?  
+             <a
+            [routerLink]="['/login']"
+            style="cursor: pointer"
+            >
+            Log in here.
+            </a>
+        </h6>
         </span>           
     </header>
     
