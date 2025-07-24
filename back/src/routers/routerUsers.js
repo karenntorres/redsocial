@@ -3,7 +3,6 @@ import { Router } from 'express';
 
 // Internal controllers
 import controllerUsers, { forgotPassword } from '../controllers/controllerUsers.js';
-import { imagesStorage } from '../middlewares/uploadImages.js';
 
 const routerUsers = Router();
 
