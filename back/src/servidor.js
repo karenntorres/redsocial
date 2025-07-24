@@ -6,6 +6,7 @@ import routerPost from './routers/routerPost.js';
 import routerComments from './routers/routerComments.js';
 import routerLogin from './routers/routerLogin.js';
 
+
 const servidor = express();
 servidor.use(morgan('dev'));
 servidor.use(express.json({ limit: '10mb' }));
@@ -23,4 +24,4 @@ servidor.get('/', (sol, res) => {
 	res.status(404).send('Not found');
 });
 
-export default servidor;
+export default servidor; 
