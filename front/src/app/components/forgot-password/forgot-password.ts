@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
-  standalone: true,
   imports: [ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './forgot-password.html',
   styleUrls: ['./forgot-password.css'],

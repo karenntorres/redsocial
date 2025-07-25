@@ -2,7 +2,6 @@
   class="container"
   style="font-family: 'Roboto', sans-serif; max-width: 800px"
 >
-  <!-- Crear nueva publicación -->
   <div class="mb-4 p-4 border rounded shadow-sm bg-white">
     <textarea
       [(ngModel)]="nuevaPublicacion"
@@ -27,7 +26,6 @@
     </button>
   </div>
 
-  <!-- Lista de publicaciones -->
   <div *ngIf="posts.length === 0" class="text-center text-muted mb-5">
     <p>There are no posts yet. Be the first to share something!</p>
   </div>
@@ -36,7 +34,6 @@
     *ngFor="let post of posts; trackBy: trackByPostId"
     class="mb-4 p-4 border rounded shadow-sm bg-white position-relative"
   >
-    <!-- Botón eliminar con icono de Bootstrap -->
     <button
       class="btn btn-sm"
       (click)="eliminar(post)"

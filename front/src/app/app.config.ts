@@ -1,14 +1,14 @@
 import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
-  provideZonelessChangeDetection
+  provideZonelessChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http'; // 👈 ya está, bien
+import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import {
   provideClientHydration,
-  withEventReplay
+  withEventReplay,
 } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-    provideHttpClient(), // ✅ AGREGA ESTA LÍNEA AQUÍ
-    provideClientHydration(withEventReplay())
-  ]
+    provideHttpClient(),
+    provideClientHydration(withEventReplay()),
+  ],
 };
