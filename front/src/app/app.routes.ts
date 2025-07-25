@@ -10,31 +10,31 @@ import { authGuard } from './guards/auth-guard';
 import { noAuthGuard } from './guards/no-auth-guard';
 
 export const routes: Routes = [
-  { path: 'main', title: 'Main', component: MainGlim }, // public
+  { path: 'main', title: 'Main', component: MainGlim },
   {
     path: 'posts',
     title: 'Explorar',
     component: Posts,
     canActivate: [authGuard],
-  }, // REQUIERE LOG IN
+  },
   {
     path: 'register',
     title: 'Register',
     component: Register,
     canActivate: [noAuthGuard],
-  }, // public
+  },
   {
     path: 'login',
     title: 'Login',
     component: Login,
     canActivate: [noAuthGuard],
-  }, // public
+  },
   {
     path: 'forgot-password',
     title: 'Forgot-password',
     component: ForgotPassword,
     canActivate: [noAuthGuard],
-  }, // public
+  },
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', title: '404 | Page Not Found', component: PageNotFound },
 ];
