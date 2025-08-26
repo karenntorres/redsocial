@@ -1,4 +1,5 @@
-import { Schema, model } from 'mongoose';
+const mongoose = require('mongoose');
+const { Schema, model } = mongoose;
 
 const schemaUser = new Schema({
   name: {
@@ -9,7 +10,7 @@ const schemaUser = new Schema({
   email: {
     type: String,
     required: [true, 'Email is required'],
-    unique: true, // evita duplicado en el email
+    unique: true,
     trim: true,
     lowercase: true,
     match: [
@@ -32,7 +33,7 @@ const schemaUser = new Schema({
     required: [true, 'Profile picture is required'],
   },
 }, {
-  timestamps: true // agrega createdAt y updatedAt automáticamente
+  timestamps: true
 });
 
-export default model('user', schemaUser);
+module.exports = model('user', schemaUser);

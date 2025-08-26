@@ -1,199 +1,209 @@
-import bcrypt from 'bcryptjs';
-import modelUsers from '../models/modelUsers.js';
-import crypto from 'crypto';
-import nodemailer from 'nodemailer';
+const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+const fs = require('fs');
+const path = require('path');
+const User = require('../models/modelUsers');
 
-// CONTROLADOR PRINCIPAL
-const controllerUsers = {
-	createUser: async (req, res) => {
-		try {
-			const { name, email, password, username, pfPicture } = req.body;
-
-			// Validar imagen
-			if (!pfPicture) {
-				return res.status(400).json({
-					result: 'mistake',
-					message: 'Profile picture is required',
-					data: null,
-				});
-			}
-
-			// Encriptar contraseña
-			const passwordEncrypted = await bcrypt.hash(password, 10);
-
-			// Crear usuario
-			const newUser = new modelUsers({
-				name,
-				email,
-				password: passwordEncrypted,
-				username,
-				pfPicture,
-			});
-
-			const createdUser = await newUser.save();
-
-			res.json({
-				result: 'All Fine',
-				message: 'User has been created',
-				data: createdUser._id,
-			});
-		} catch (error) {
-			res.status(500).json({
-				result: 'mistake',
-				message: 'An error occurred while creating the user',
-				data: error.message || error,
-			});
-		}
-	},
-
-	readUser: async (req, res) => {
-		try {
-			const userFound = await modelUsers.findById(req.params.id);
-			if (userFound) {
-				res.json({
-					result: 'All Fine',
-					message: 'User has been found',
-					data: userFound,
-				});
-			} else {
-				res.status(404).json({
-					result: 'mistake',
-					message: 'User not found',
-					data: null,
-				});
-			}
-		} catch (error) {
-			res.status(500).json({
-				result: 'mistake',
-				message: 'An error occurred while reading the user',
-				data: error.message || error,
-			});
-		}
-	},
-
-	readAllUsers: async (req, res) => {
-		try {
-			const allUsersFound = await modelUsers.find();
-			res.json({
-				result: 'All fine',
-				message: 'All users found',
-				data: allUsersFound,
-			});
-		} catch (error) {
-			res.status(500).json({
-				result: 'mistake',
-				message: 'An error occurred while reading all users',
-				data: error.message || error,
-			});
-		}
-	},
-
-	updateUser: async (req, res) => {
-		try {
-			const userUpdated = await modelUsers.findByIdAndUpdate(
-				req.params.id,
-				req.body,
-				{ new: true }
-			);
-			if (userUpdated) {
-				res.json({
-					result: 'All Fine',
-					message: 'User info has been updated',
-					data: userUpdated._id,
-				});
-			} else {
-				res.status(404).json({
-					result: 'mistake',
-					message: 'User not found',
-					data: null,
-				});
-			}
-		} catch (error) {
-			res.status(500).json({
-				result: 'mistake',
-				message: 'An error occurred while updating the user info',
-				data: error.message || error,
-			});
-		}
-	},
-
-	deleteUser: async (req, res) => {
-		try {
-			const deletedUser = await modelUsers.findByIdAndDelete(
-				req.params.id
-			);
-			if (deletedUser) {
-				res.json({
-					result: 'All Fine',
-					message: 'User has been deleted',
-					data: null,
-				});
-			} else {
-				res.status(404).json({
-					result: 'mistake',
-					message: 'User not found',
-					data: null,
-				});
-			}
-		} catch (error) {
-			res.status(500).json({
-				result: 'mistake',
-				message: 'An error occurred while deleting the user',
-				data: error.message || error,
-			});
-		}
-	},
-};
-
-// FUNCIÓN PARA GENERAR CONTRASEÑAS ALEATORIAS
+// Función para generar contraseña aleatoria
 function generateRandomPassword() {
-	return crypto.randomBytes(6).toString('hex');
+  return crypto.randomBytes(6).toString('hex');
 }
 
-// CONTROLADOR PARA RECUPERAR CONTRASEÑA
-export const forgotPassword = async (req, res) => {
-	try {
-		const { email } = req.body;
-		const user = await modelUsers.findOne({ email });
+// Función para registrar logs
+function registrarLog(action, data) {
+  const logPath = path.join(__dirname, '..', 'logs', 'audit.log');
+  const logEntry = `${new Date().toISOString()} - Acción: ${action} - Datos: ${JSON.stringify(data)}\n`;
+  fs.appendFileSync(logPath, logEntry);
+}
 
-		if (!user) {
-			return res.status(404).json({
-				message: 'Email address was not found in Database',
-			});
-		}
+// Recuperar contraseña
+async function forgotPassword(req, res) {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
 
-		const newPassword = generateRandomPassword();
-		const hashedPassword = await bcrypt.hash(newPassword, 10);
+    if (!user) {
+      return res.status(404).json({
+        message: 'Email address was not found in Database',
+      });
+    }
 
-		user.password = hashedPassword;
-		await user.save();
+    const newPassword = generateRandomPassword();
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-		const transporter = nodemailer.createTransport({
-			service: 'gmail',
-			auth: {
-				user: process.env.EMAIL_NODE,
-				pass: process.env.PASS_NODE,
-			},
-		});
+    user.password = hashedPassword;
+    await user.save();
 
-		const mailOptions = {
-			from: process.env.EMAIL_NODE,
-			to: email,
-			subject: 'Password recovery',
-			text: `Hi ${user.name},\n\nyour new password is: ${newPassword}\n\nPlease change it after logging in\n\nGreetings,\nGlim Team.`,
-		};
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_NODE,
+        pass: process.env.PASS_NODE,
+      },
+    });
 
-		await transporter.sendMail(mailOptions);
+    const mailOptions = {
+      from: process.env.EMAIL_NODE,
+      to: email,
+      subject: 'Password recovery',
+      text: `Hi ${user.name},\n\nyour new password is: ${newPassword}\n\nPlease change it after logging in\n\nGreetings,\nGlim Team.`,
+    };
 
-		res.status(200).json({
-			message: 'A new password has been sent to the registered email',
-		});
-	} catch (error) {
-		res.status(500).json({
-			message: 'Internal server error',
-			error: error.message || error,
-		});
-	}
+    await transporter.sendMail(mailOptions);
+
+    res.status(200).json({
+      message: 'A new password has been sent to the registered email',
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Internal server error',
+      error: error.message || error,
+    });
+  }
+}
+
+// Controladores principales
+async function createUser(req, res) {
+  try {
+    const { name, email, password, username, pfPicture } = req.body;
+
+    if (!pfPicture) {
+      return res.status(400).json({
+        result: 'mistake',
+        message: 'Profile picture is required',
+        data: null,
+      });
+    }
+
+    const passwordEncrypted = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      name,
+      email,
+      password: passwordEncrypted,
+      username,
+      pfPicture,
+    });
+
+    const createdUser = await newUser.save();
+
+    registrarLog('Crear usuario', { name, email, username, pfPicture });
+
+    res.json({
+      result: 'All Fine',
+      message: 'User has been created',
+      data: createdUser._id,
+    });
+  } catch (error) {
+    res.status(500).json({
+      result: 'mistake',
+      message: 'An error occurred while creating the user',
+      data: error.message || error,
+    });
+  }
+}
+
+async function readUser(req, res) {
+  try {
+    const userFound = await User.findById(req.params.id);
+    if (userFound) {
+      res.json({
+        result: 'All Fine',
+        message: 'User has been found',
+        data: userFound,
+      });
+    } else {
+      res.status(404).json({
+        result: 'mistake',
+        message: 'User not found',
+        data: null,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      result: 'mistake',
+      message: 'An error occurred while reading the user',
+      data: error.message || error,
+    });
+  }
+}
+
+async function readAllUsers(req, res) {
+  try {
+    const allUsersFound = await User.find();
+    res.status(200).json(allUsersFound);
+  } catch (error) {
+    res.status(500).json({
+      result: 'mistake',
+      message: 'An error occurred while reading all users',
+      data: error.message || error,
+    });
+  }
+}
+
+async function updateUser(req, res) {
+  try {
+    const userUpdated = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (userUpdated) {
+      registrarLog('Actualizar usuario', { id: req.params.id, cambios: req.body });
+      res.json({
+        result: 'All Fine',
+        message: 'User info has been updated',
+        data: userUpdated._id,
+      });
+    } else {
+      res.status(404).json({
+        result: 'mistake',
+        message: 'User not found',
+        data: null,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      result: 'mistake',
+      message: 'An error occurred while updating the user info',
+      data: error.message || error,
+    });
+  }
+}
+
+async function deleteUser(req, res) {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    if (deletedUser) {
+      registrarLog('Eliminar usuario', { id: req.params.id });
+      res.json({
+        result: 'All Fine',
+        message: 'User has been deleted',
+        data: null,
+      });
+    } else {
+      res.status(404).json({
+        result: 'mistake',
+        message: 'User not found',
+        data: null,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      result: 'mistake',
+      message: 'An error occurred while deleting the user',
+      data: error.message || error,
+    });
+  }
+}
+
+// Exportar todos los métodos
+module.exports = {
+  createUser,
+  readUser,
+  readAllUsers,
+  updateUser,
+  deleteUser,
+  forgotPassword,
 };
-
-export default controllerUsers;
