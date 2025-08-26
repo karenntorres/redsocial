@@ -1,9 +1,9 @@
-import { Router } from 'express';
-import controllerLogin from '../controllers/controllerLogin.js';
+const express = require('express');
+const { userLogin, validateToken } = require('../controllers/controllerLogin');
 
-const routerLogin = Router();
+const router = express.Router();
 
-routerLogin.post('/', controllerLogin.userLogin);
-routerLogin.get('/token/:token', controllerLogin.validateToken);
+router.post('/', userLogin);
+router.get('/token/:token', validateToken);
 
-export default routerLogin;
+module.exports = router;

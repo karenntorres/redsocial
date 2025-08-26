@@ -33,7 +33,7 @@ const schemaUser = new Schema({
     required: [true, 'Profile picture is required'],
   },
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
-module.exports = model('user', schemaUser);
+module.exports = model('User', schemaUser);

@@ -2,33 +2,25 @@
   "name": "redsocial",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "back/index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon back/src/index.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "dev": "nodemon back/index.js",
+    "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/karenntorres/redsocial.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/karenntorres/redsocial/issues"
-  },
-  "homepage": "https://github.com/karenntorres/redsocial#readme",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0",
+    "multer": "^2.0.2",
     "nodemailer": "^7.0.5"
   },
   "devDependencies": {
     "jest": "^29.7.0",
     "nodemon": "^3.1.0",
-    "supertest": "^6.3.3"
+    "supertest": "^6.3.4"
   }
 }

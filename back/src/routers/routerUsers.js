@@ -1,62 +1,108 @@
 const express = require('express');
-const User = require('../models/modelUsers.js'); // Asegúrate de que User.js esté en src/models
-const router = express.Router();
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
+const {
+  createUser,
+  readAllUsers,
+  deleteUser,
+  findUser,
+  findUserByEmail,
+} = require('../controllers/controllerUsers');
 
-// Obtener todos los usuarios
+const router = express.Router();
+const upload = multer({ dest: 'imagenes/' });
+
+const logPath = path.join(__dirname, '..', 'logs', 'bitacora.log');
+
+function registrarLog(accion, datos) {
+  const entrada = `[${new Date().toISOString()}] Acción: ${accion} | Datos: ${JSON.stringify(datos)}\n`;
+  try {
+    fs.appendFileSync(logPath, entrada);
+  } catch (err) {
+    console.error('❌ Error al escribir en bitácora:', err);
+  }
+}
+
+// 📤 Crear usuario con imagen
+router.post('/', upload.single('pfPicture'), async (req, res) => {
+  try {
+    const { name, email, password, username } = req.body;
+    if (!name || !email || !password || !username || !req.file) {
+      registrarLog('Error por campos faltantes', req.body);
+      return res.status(400).json({
+        result: 'mistake',
+        message: 'Todos los campos son obligatorios, incluyendo la imagen',
+        data: null,
+      });
+    }
+
+    req.body.pfPicture = req.file.filename;
+    await createUser(req, res);
+  } catch (err) {
+    registrarLog('Error al crear usuario', { error: err.message });
+    res.status(500).json({
+      result: 'mistake',
+      message: 'Error al crear usuario',
+      data: err.message || err,
+    });
+  }
+});
+
+// 📥 Obtener todos los usuarios
 router.get('/', async (req, res) => {
   try {
-    const users = await User.find();
-    res.status(200).json(users);
+    console.log('📥 GET /api/users ejecutado');
+    await readAllUsers(req, res);
   } catch (err) {
-    res.status(500).json({ error: 'Error al obtener usuarios' });
+    registrarLog('Error al consultar usuarios', { error: err.message });
+    res.status(500).json({
+      result: 'mistake',
+      message: 'Error al obtener usuarios',
+      data: err.message || err,
+    });
   }
 });
 
-// Crear un nuevo usuario
-router.post('/', async (req, res) => {
-  try {
-    const nuevoUsuario = new User(req.body);
-    const usuarioGuardado = await nuevoUsuario.save();
-    res.status(201).json(usuarioGuardado);
-  } catch (err) {
-    res.status(400).json({ error: 'Error al crear usuario', detalles: err.message });
-  }
-});
-
-// Obtener un usuario por ID
-router.get('/:id', async (req, res) => {
-  try {
-    const usuario = await User.findById(req.params.id);
-    if (!usuario) return res.status(404).json({ error: 'Usuario no encontrado' });
-    res.status(200).json(usuario);
-  } catch (err) {
-    res.status(500).json({ error: 'Error al buscar usuario' });
-  }
-});
-
-// Actualizar un usuario por ID
-router.put('/:id', async (req, res) => {
-  try {
-    const usuarioActualizado = await User.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
-    );
-    if (!usuarioActualizado) return res.status(404).json({ error: 'Usuario no encontrado' });
-    res.status(200).json(usuarioActualizado);
-  } catch (err) {
-    res.status(400).json({ error: 'Error al actualizar usuario', detalles: err.message });
-  }
-});
-
-// Eliminar un usuario por ID
+// 🗑️ Eliminar usuario por ID
 router.delete('/:id', async (req, res) => {
   try {
-    const usuarioEliminado = await User.findByIdAndDelete(req.params.id);
-    if (!usuarioEliminado) return res.status(404).json({ error: 'Usuario no encontrado' });
-    res.status(200).json({ mensaje: 'Usuario eliminado correctamente' });
+    await deleteUser(req, res);
   } catch (err) {
-    res.status(500).json({ error: 'Error al eliminar usuario' });
+    registrarLog('Error al eliminar usuario', { error: err.message });
+    res.status(500).json({
+      result: 'mistake',
+      message: 'Error al eliminar usuario',
+      data: err.message || err,
+    });
+  }
+});
+
+// 🔍 Buscar usuario por ID
+router.post('/findUser', async (req, res) => {
+  try {
+    await findUser(req, res);
+  } catch (err) {
+    registrarLog('Error en findUser', { error: err.message });
+    res.status(500).json({
+      result: 'mistake',
+      message: 'Error interno en findUser',
+      data: err.message || err,
+    });
+  }
+});
+
+// 📧 Buscar usuario por email
+router.post('/findUserByEmail', async (req, res) => {
+  try {
+    await findUserByEmail(req, res);
+  } catch (err) {
+    registrarLog('Error en findUserByEmail', { error: err.message });
+    res.status(500).json({
+      result: 'mistake',
+      message: 'Error interno en findUserByEmail',
+      data: err.message || err,
+    });
   }
 });
 

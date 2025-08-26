@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 
-export function generateToken(payload) {
+function generateToken(payload) {
 	return new Promise((resolver, rechazar) => {
 		jwt.sign(
 			payload,
@@ -17,7 +17,7 @@ export function generateToken(payload) {
 	});
 }
 
-export function verifyToken(token) {
+function verifyToken(token) {
 	return new Promise((resolver, rechazar) => {
 		jwt.verify(token, 'llave secreta', (error, decodificado) => {
 			if (error) {
@@ -28,3 +28,8 @@ export function verifyToken(token) {
 		});
 	});
 }
+
+module.exports = {
+	generateToken,
+	verifyToken
+};
