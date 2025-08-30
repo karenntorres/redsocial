@@ -1,13 +1,13 @@
-// External imports
 import { Router } from 'express';
-
-// Internal controllers
-import controllerUsers, { forgotPassword } from '../controllers/controllerUsers.js';
+import controllerUsers, {
+	forgotPassword,
+} from '../controllers/controllerUsers.js';
+import upload from '../middlewares/uploadImages.js'; // 👈 updated import
 
 const routerUsers = Router();
 
-// 👤 User routes
-routerUsers.post('/', controllerUsers.createUser);
+// User routes
+routerUsers.post('/', upload.single('pfPicture'), controllerUsers.createUser);
 routerUsers.get('/:id', controllerUsers.readUser);
 routerUsers.get('/', controllerUsers.readAllUsers);
 routerUsers.put('/:id', controllerUsers.updateUser);

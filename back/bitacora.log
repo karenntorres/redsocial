@@ -1,0 +1,88 @@
+[2025-08-26T21:58:06.498Z] Consulta de todos los usuarios
+[2025-08-26T22:01:46.147Z] Error creando usuario: Cannot destructure property 'name' of 'req.body' as it is undefined.
+[2025-08-26T22:01:48.329Z] Error creando usuario: Cannot destructure property 'name' of 'req.body' as it is undefined.
+[2025-08-26T22:03:10.173Z] Error creando usuario: Cannot destructure property 'name' of 'req.body' as it is undefined.
+[2025-08-26T22:05:58.250Z] Usuario creado: {"name":"Laura Reyes","email":"LauriReyes@gmail.com","username":"LauRey"}
+[2025-08-26T22:14:05.633Z] Intento fallido de crear usuario: falta foto de perfil
+[2025-08-26T22:14:09.128Z] Intento fallido de crear usuario: falta foto de perfil
+[2025-08-26T22:15:10.037Z] Usuario creado: {"name":"Rolando","email":"Roliperez@gmail.com","username":"Rol"}
+[2025-08-26T22:15:30.497Z] Consulta de todos los usuarios
+[2025-08-26T22:26:16.411Z] Usuario eliminado: 688039f0c2fcf81bd0625eb0
+[2025-08-26T22:26:40.631Z] Consulta de todos los usuarios
+[2025-08-26T22:27:09.208Z] Usuario eliminado: 68803c65c2fcf81bd0625eb2
+[2025-08-26T22:27:14.195Z] Consulta de todos los usuarios
+[2025-08-26T22:27:34.082Z] Usuario eliminado: 68804d5a15dc3e4d158921ed
+[2025-08-26T22:27:39.139Z] Consulta de todos los usuarios
+[2025-08-26T22:28:19.727Z] Usuario eliminado: 688174b0f269059b61a34d8c
+[2025-08-26T22:28:25.261Z] Consulta de todos los usuarios
+[2025-08-26T22:28:40.450Z] Usuario eliminado: 688176a5578e997894d51680
+[2025-08-26T22:28:45.297Z] Consulta de todos los usuarios
+[2025-08-26T22:28:59.573Z] Usuario eliminado: 68818a187a2790ecc43b8a47
+[2025-08-26T22:29:28.661Z] Consulta de todos los usuarios
+[2025-08-26T22:31:08.232Z] Usuario actualizado: 6882ccbc49adba0097c90bf7
+[2025-08-26T22:31:16.649Z] Consulta de todos los usuarios
+[2025-08-26T22:31:45.576Z] Contraseña reestablecida para: tobisein@gmail.com
+[2025-08-26T22:40:07.522Z] Consulta de todos los usuarios
+[2025-08-26T22:40:07.554Z] Intento fallido de crear usuario: falta foto de perfil
+[2025-08-26T22:40:07.563Z] Intento fallido de crear usuario: falta foto de perfil
+[2025-08-26T22:40:07.568Z] Error leyendo usuario null: Cast to ObjectId failed for value "null" (type string) at path "_id" for model "user"
+[2025-08-26T22:40:07.573Z] Intento fallido de crear usuario: falta foto de perfil
+[2025-08-26T22:40:54.180Z] Consulta de todos los usuarios
+[2025-08-26T22:40:54.210Z] Intento fallido de crear usuario: falta foto de perfil
+[2025-08-26T22:40:54.217Z] Intento fallido de crear usuario: falta foto de perfil
+[2025-08-26T22:40:54.221Z] Error leyendo usuario null: Cast to ObjectId failed for value "null" (type string) at path "_id" for model "user"
+[2025-08-26T22:40:54.226Z] Intento fallido de crear usuario: falta foto de perfil
+[2025-08-26T23:02:52.306Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-08-26T23:02:52.901Z] Consulta de todos los usuarios
+[2025-08-26T23:02:53.053Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-08-26T23:02:53.123Z] Usuario consultado: 68ae3d1b4d6ce414c3a93eff
+[2025-08-26T23:49:44.914Z] Consulta de todos los usuarios
+[2025-08-28T18:36:34.276Z] Error creando usuario: E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "test@example.com" }
+[2025-08-28T18:36:34.994Z] Consulta de todos los usuarios
+[2025-08-28T18:36:35.145Z] Error creando usuario: E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "another@example.com" }
+[2025-08-28T18:36:35.151Z] Error leyendo usuario E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "test@example.com" }: Cast to ObjectId failed for value "E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "test@example.com" }" (type string) at path "_id" for model "user"
+[2025-08-28T18:40:44.950Z] Error creando usuario: E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "test@example.com" }
+[2025-08-28T18:40:45.678Z] Consulta de todos los usuarios
+[2025-08-28T18:40:45.826Z] Error creando usuario: E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "another@example.com" }
+[2025-08-28T18:40:45.833Z] Error leyendo usuario E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "test@example.com" }: Cast to ObjectId failed for value "E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "test@example.com" }" (type string) at path "_id" for model "user"
+[2025-08-28T18:40:58.141Z] Consulta de todos los usuarios
+[2025-08-28T18:41:47.505Z] Usuario eliminado: 68ae3d1b4d6ce414c3a93eff
+[2025-08-28T18:41:56.856Z] Consulta de todos los usuarios
+[2025-08-28T18:42:20.865Z] Usuario eliminado: 68ae3d1c4d6ce414c3a93f05
+[2025-08-28T18:42:29.202Z] Consulta de todos los usuarios
+[2025-08-28T18:42:49.530Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-08-28T18:42:50.295Z] Consulta de todos los usuarios
+[2025-08-28T18:42:50.453Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-08-28T18:42:50.518Z] Usuario consultado: 68b0a328de94d4200053d46e
+[2025-08-28T18:57:43.909Z] Consulta de todos los usuarios
+[2025-08-28T19:11:41.211Z] Consulta de todos los usuarios
+[2025-08-28T19:11:53.085Z] Contraseña reestablecida para: tobisein@gmail.com
+[2025-08-28T20:30:16.320Z] Consulta de todos los usuarios
+[2025-08-28T20:30:57.860Z] Usuario eliminado: 68b0a328de94d4200053d46e
+[2025-08-28T20:31:05.927Z] Consulta de todos los usuarios
+[2025-08-28T20:31:16.924Z] Usuario eliminado: 68b0a32ade94d4200053d474
+[2025-08-28T20:31:22.498Z] Consulta de todos los usuarios
+[2025-08-29T00:05:15.775Z] Consulta de todos los usuarios
+[2025-08-29T00:05:55.319Z] Usuario actualizado: 6882ccbc49adba0097c90bf7
+[2025-08-29T00:06:38.939Z] Usuario actualizado: 6882ccbc49adba0097c90bf7
+[2025-08-29T00:07:14.874Z] Consulta de todos los usuarios
+[2025-08-29T00:07:45.148Z] Contraseña reestablecida para: tobisein@gmail.com
+[2025-08-29T01:20:03.985Z] Consulta de todos los usuarios
+[2025-08-29T02:29:23.442Z] Error creando usuario: E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "roliperez@gmail.com" } MongoServerError: E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "roliperez@gmail.com" }
+    at InsertOneOperation.execute (C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongodb\lib\operations\insert.js:51:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async tryOperation (C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongodb\lib\operations\execute_operation.js:207:20)
+    at async executeOperation (C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongodb\lib\operations\execute_operation.js:75:16)
+    at async Collection.insertOne (C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongodb\lib\collection.js:157:16) 
+[2025-08-29T02:29:52.961Z] Error creando usuario: user validation failed: email: Invalid email format ValidationError: user validation failed: email: Invalid email format
+    at Document.invalidate (C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongoose\lib\document.js:3352:32)
+    at C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongoose\lib\document.js:3113:17
+    at C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongoose\lib\schemaType.js:1407:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:85:11) 
+[2025-08-29T02:30:39.314Z] Error creando usuario: E11000 duplicate key error collection: test.users index: username_1 dup key: { username: "Rol" } MongoServerError: E11000 duplicate key error collection: test.users index: username_1 dup key: { username: "Rol" }
+    at InsertOneOperation.execute (C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongodb\lib\operations\insert.js:51:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async tryOperation (C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongodb\lib\operations\execute_operation.js:207:20)
+    at async executeOperation (C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongodb\lib\operations\execute_operation.js:75:16)
+    at async Collection.insertOne (C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongodb\lib\collection.js:157:16) 
+[2025-08-29T02:30:57.711Z] Usuario creado: {"name":"Rolando","email":"andresito@mailsac.com","username":"Rolandito"}

@@ -1,12 +1,24 @@
-import multer from 'multer'; // to upload images
-import path from 'path'; // to manipulate and manage files and folders
+import multer from 'multer';
+import path from 'path';
 
+// Configure disk storage
 const storage = multer.diskStorage({
-    destination: 'images',
-    filename:
-    (req, file, cb)=>{
-            cb(null, file.originalname);
-    },
+	destination: (req, file, cb) => {
+		cb(null, 'images/'); // folder where images will be stored
+	},
+	filename: (req, file, cb) => {
+		const extension = path.extname(file.originalname);
+		const nameWithoutExt = path
+			.basename(file.originalname, extension)
+			.replace(/\s+/g, '-')
+			.toLowerCase();
+		const timestamp = Date.now();
+		const uniqueName = `${nameWithoutExt}-${timestamp}${extension}`;
+		cb(null, uniqueName);
+	},
 });
 
-export const imagesStorage = multer({storage}).single('pfPicture');
+// Multer instance, expecting field "pfPicture"
+const upload = multer({ storage });
+
+export default upload;

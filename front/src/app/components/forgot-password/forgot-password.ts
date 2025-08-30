@@ -8,6 +8,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-forgot-password',
@@ -28,7 +29,8 @@ export class ForgotPassword {
     if (this.recoverForm.valid) {
       const email = this.recoverForm.value.email;
       this.httpClient
-        .post<any>('http://localhost:3001/users/forgot-password', { email })
+
+        .post<any>(`${environment.apiUrl}/users/forgot-password`, { email })
         .subscribe({
           next: (res) => {
             this.message = res.message;
