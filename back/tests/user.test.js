@@ -4,11 +4,13 @@ import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import servidor from '../src/servidor.js';
 import '../src/conexion.js';
+import User from '../src/models/modelUsers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 let createdUserId;
+let createdUsers = [];
 
 describe('Pruebas de integración de usuarios', () => {
 	beforeAll(async () => {
@@ -21,6 +23,7 @@ describe('Pruebas de integración de usuarios', () => {
 			.attach('pfPicture', join(__dirname, 'files/Nutriapaloma.png'));
 
 		createdUserId = res.body.data;
+		createdUsers.push(createdUserId);
 	});
 
 	it('Debe responder con lista de usuarios', async () => {
@@ -37,6 +40,8 @@ describe('Pruebas de integración de usuarios', () => {
 			.field('password', 'password456')
 			.field('username', 'anotheruser123')
 			.attach('pfPicture', join(__dirname, 'files/Nutriapaloma.png'));
+
+		createdUsers.push(res.body.data);
 
 		expect(res.statusCode).toBe(200);
 		expect(res.body).toHaveProperty('data');
@@ -72,5 +77,13 @@ describe('Pruebas de integración de usuarios', () => {
 });
 
 afterAll(async () => {
+	if (createdUsers.length > 0) {
+		await User.deleteMany({ _id: { $in: createdUsers } });
+	}
+
+	if (servidor && servidor.close) {
+		await new Promise((resolve) => servidor.close(resolve));
+	}
+
 	await mongoose.connection.close();
 });

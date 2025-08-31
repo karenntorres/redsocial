@@ -86,3 +86,40 @@
     at async executeOperation (C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongodb\lib\operations\execute_operation.js:75:16)
     at async Collection.insertOne (C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongodb\lib\collection.js:157:16) 
 [2025-08-29T02:30:57.711Z] Usuario creado: {"name":"Rolando","email":"andresito@mailsac.com","username":"Rolandito"}
+[2025-08-30T18:34:48.176Z] Consulta de todos los usuarios
+[2025-08-30T19:04:54.434Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-08-30T19:04:55.099Z] Consulta de todos los usuarios
+[2025-08-30T19:04:55.250Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-08-30T19:04:55.325Z] Usuario consultado: 68b34b54324aa823dbf83217
+[2025-08-30T19:09:33.763Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-08-30T19:09:38.909Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-08-30T19:09:38.980Z] Usuario consultado: 68b34c6b8ab7d8374d83eba2
+[2025-08-30T19:09:39.640Z] Consulta de todos los usuarios
+[2025-08-30T19:09:58.218Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-08-30T19:09:58.954Z] Consulta de todos los usuarios
+[2025-08-30T19:09:59.118Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-08-30T19:09:59.188Z] Usuario consultado: 68b34c843937468d4e7bdb49
+[2025-08-30T23:54:40.292Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-08-30T23:54:41.015Z] Consulta de todos los usuarios
+[2025-08-30T23:54:41.166Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-08-30T23:54:41.246Z] Usuario consultado: 68b38f3e66669eb101d8a6fe
+[2025-08-31T00:59:12.463Z] Error creando usuario: Operation `users.insertOne()` buffering timed out after 10000ms MongooseError: Operation `users.insertOne()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (C:\Users\tobis\OneDrive\Documentos\Bootcamp Web Fullstack\Proyecto Red Social\redsocial\back\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:187:23)
+    at listOnTimeout (node:internal/timers:588:17)
+    at processTimers (node:internal/timers:523:7) 
+[2025-08-31T00:59:44.659Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-08-31T00:59:49.816Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-08-31T00:59:49.890Z] Usuario consultado: 68b39e7e61c29d2e2ffb5237
+[2025-08-31T00:59:54.112Z] Consulta de todos los usuarios
+[2025-08-31T01:00:04.005Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-08-31T01:00:08.513Z] Consulta de todos los usuarios
+[2025-08-31T01:00:08.662Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-08-31T01:00:08.735Z] Usuario consultado: 68b39e92d4786e45a9d9eee8
+[2025-08-31T01:01:25.356Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-08-31T01:01:26.519Z] Consulta de todos los usuarios
+[2025-08-31T01:01:26.678Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-08-31T01:01:26.757Z] Usuario consultado: 68b39ee396e1599548064b9d
+[2025-08-31T01:01:39.473Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-08-31T01:01:44.914Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-08-31T01:01:44.994Z] Usuario consultado: 68b39ef23a3bac86fba9aa97
+[2025-08-31T01:01:46.035Z] Consulta de todos los usuarios
