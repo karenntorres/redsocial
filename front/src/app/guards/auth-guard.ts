@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { StorageService } from '../services/storage.service';
+import jwt_decode from 'jwt-decode'; // ✅ import added
 
 export const authGuard: CanActivateFn = () => {
   const router = inject(Router);
@@ -9,10 +10,18 @@ export const authGuard: CanActivateFn = () => {
   const token = storage.getToken();
 
   if (!token) {
-    alert('You must log in to access. You will be redirected to "Log In".');
+    alert('You must log in to access. Redirecting to Log In.');
     router.navigateByUrl('/login');
     return false;
   }
 
-  return true;
+  try {
+    jwt_decode(token); // decode to validate
+    return true;
+  } catch (error) {
+    console.error('Invalid token', error);
+    storage.clear();
+    router.navigateByUrl('/login');
+    return false;
+  }
 };

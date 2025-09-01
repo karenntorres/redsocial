@@ -1,8 +1,15 @@
-.navinavi{
- margin-left: 30px;
- margin-top: 10px;
+.navinavi {
+  margin-left: 30px;
+  margin-top: 10px;
 }
-.naviderecho{
-    padding: 0;
-    margin-right: 10px;
+
+.naviderecho {
+  padding: 0;
+  margin-right: 10px;
+}
+
+/* Highlight the active nav link */
+.navbar-nav .nav-link.active {
+  font-weight: bold;
+  color: #0d6efd !important; /* Bootstrap primary blue */
 }

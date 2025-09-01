@@ -107,22 +107,32 @@ const controllerUsers = {
 
 	updateUser: async (req, res) => {
 		try {
+			const updates = { ...req.body };
+
+			// 🔑 Handle password change
+			if (updates.password) {
+				updates.password = await bcrypt.hash(updates.password, 10);
+			}
+
+			// 🖼️ Handle profile picture change
+			if (req.file) {
+				updates.pfPicture = req.file.filename;
+			}
+
 			const userUpdated = await modelUsers.findByIdAndUpdate(
 				req.params.id,
-				req.body,
+				updates,
 				{ new: true }
 			);
+
 			if (userUpdated) {
 				registrarLog(`Usuario actualizado: ${req.params.id}`);
 				res.json({
 					result: 'All Fine',
 					message: 'User info has been updated',
-					data: userUpdated._id,
+					data: userUpdated,
 				});
 			} else {
-				registrarLog(
-					`Intento fallido de actualizar usuario: ${req.params.id} no encontrado`
-				);
 				res.status(404).json({
 					result: 'mistake',
 					message: 'User not found',

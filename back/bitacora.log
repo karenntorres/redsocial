@@ -123,3 +123,20 @@
 [2025-08-31T01:01:44.914Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
 [2025-08-31T01:01:44.994Z] Usuario consultado: 68b39ef23a3bac86fba9aa97
 [2025-08-31T01:01:46.035Z] Consulta de todos los usuarios
+[2025-09-01T03:34:51.579Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T03:34:52.301Z] Consulta de todos los usuarios
+[2025-09-01T03:34:52.474Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T03:34:52.558Z] Usuario consultado: 68b5145a29fe6ab691425457
+[2025-09-01T03:41:44.689Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T03:41:45.344Z] Consulta de todos los usuarios
+[2025-09-01T03:41:45.512Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T03:41:45.583Z] Usuario consultado: 68b515f77967d9cdd6e57a4a
+[2025-09-01T03:41:50.107Z] Consulta de todos los usuarios
+[2025-09-01T05:26:40.632Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T05:26:41.277Z] Consulta de todos los usuarios
+[2025-09-01T05:26:41.450Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T05:26:41.525Z] Usuario consultado: 68b52e8fd945722355072832
+[2025-09-01T05:29:13.145Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T05:29:13.804Z] Consulta de todos los usuarios
+[2025-09-01T05:29:13.965Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T05:29:14.034Z] Usuario consultado: 68b52f272bcbef46ec56a90b

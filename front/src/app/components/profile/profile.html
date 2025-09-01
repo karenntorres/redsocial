@@ -1,0 +1,27 @@
+<!-- Render as soon as user exists -->
+<div *ngIf="user as u; else loadingTpl" class="profile-container">
+  <div class="profile-card">
+    <!-- Profile Picture -->
+    <div class="profile-avatar-wrapper">
+      <img
+        *ngIf="u.pfPicture"
+        [src]="safePicture || u.pfPicture"
+        alt="Profile Picture"
+        class="profile-avatar"
+      />
+      <div *ngIf="!u.pfPicture" class="profile-avatar placeholder">
+        <span>No Pic</span>
+      </div>
+    </div>
+
+    <!-- User Info -->
+    <div class="profile-info">
+      <h2 class="profile-name">{{ u.name }}</h2>
+      <p class="profile-username">{{ u.username }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <p>Loading profile...</p>
+</ng-template>

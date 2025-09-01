@@ -33,15 +33,26 @@ export class Login {
       if (typeof email === 'string' && typeof password === 'string') {
         const credentials: Credentials = { email, password };
 
-        this.loginService.login(credentials).subscribe((response: any) => {
-          if (response.result === 'fine') {
-            localStorage.setItem('token', response.data);
-            this.router.navigateByUrl('/posts');
-          } else {
-            console.error('Error, try again');
-            this.router.navigateByUrl('/login');
+        this.loginService.login(credentials).subscribe(
+          (response: any) => {
+            if (response.result === 'fine') {
+              // ✅ Save the JWT token correctly
+              localStorage.setItem('token', response.data.token);
+
+              // (Optional) Save user info if you want to display it later
+              localStorage.setItem('user', JSON.stringify(response.data.user));
+
+              // Redirect to posts page
+              this.router.navigateByUrl('/posts');
+            } else {
+              console.error('Error, try again');
+              this.router.navigateByUrl('/login');
+            }
+          },
+          (error) => {
+            console.error('Login request failed:', error);
           }
-        });
+        );
       }
     } else {
       console.log('Formulario inválido');

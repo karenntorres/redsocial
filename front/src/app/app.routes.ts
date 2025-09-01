@@ -6,6 +6,9 @@ import { Login } from './components/login/login';
 import { ForgotPassword } from './components/forgot-password/forgot-password';
 import { PageNotFound } from './components/page-not-found/page-not-found';
 
+import { Profile } from './components/profile/profile';
+import { Settings } from './components/websettings/settings';
+
 import { authGuard } from './guards/auth-guard';
 import { noAuthGuard } from './guards/no-auth-guard';
 
@@ -15,6 +18,18 @@ export const routes: Routes = [
     path: 'posts',
     title: 'Explorar',
     component: Posts,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'profile',
+    title: 'Profile',
+    component: Profile,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'settings',
+    title: 'Settings',
+    component: Settings,
     canActivate: [authGuard],
   },
   {

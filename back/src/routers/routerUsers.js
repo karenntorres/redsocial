@@ -2,7 +2,7 @@ import { Router } from 'express';
 import controllerUsers, {
 	forgotPassword,
 } from '../controllers/controllerUsers.js';
-import upload from '../middlewares/uploadImages.js'; // 👈 updated import
+import upload from '../middlewares/uploadImages.js';
 
 const routerUsers = Router();
 
@@ -10,7 +10,7 @@ const routerUsers = Router();
 routerUsers.post('/', upload.single('pfPicture'), controllerUsers.createUser);
 routerUsers.get('/:id', controllerUsers.readUser);
 routerUsers.get('/', controllerUsers.readAllUsers);
-routerUsers.put('/:id', controllerUsers.updateUser);
+routerUsers.put('/:id', upload.single('pfPicture'), controllerUsers.updateUser);
 routerUsers.delete('/:id', controllerUsers.deleteUser);
 
 // Password recovery

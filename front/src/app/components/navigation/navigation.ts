@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: './navigation.html',
   styleUrls: ['./navigation.css'],
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterModule], // ✅ RouterModule covers routerLink, routerLinkActive, etc.
 })
 export class Navigation {
   constructor(private router: Router) {}
@@ -21,5 +21,3 @@ export class Navigation {
     this.router.navigateByUrl('/login');
   }
 }
-
-
