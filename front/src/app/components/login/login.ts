@@ -36,13 +36,10 @@ export class Login {
         this.loginService.login(credentials).subscribe(
           (response: any) => {
             if (response.result === 'fine') {
-              // ✅ Save the JWT token correctly
               localStorage.setItem('token', response.data.token);
 
-              // (Optional) Save user info if you want to display it later
               localStorage.setItem('user', JSON.stringify(response.data.user));
 
-              // Redirect to posts page
               this.router.navigateByUrl('/posts');
             } else {
               console.error('Error, try again');

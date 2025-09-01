@@ -109,12 +109,10 @@ const controllerUsers = {
 		try {
 			const updates = { ...req.body };
 
-			// 🔑 Handle password change
 			if (updates.password) {
 				updates.password = await bcrypt.hash(updates.password, 10);
 			}
 
-			// 🖼️ Handle profile picture change
 			if (req.file) {
 				updates.pfPicture = req.file.filename;
 			}

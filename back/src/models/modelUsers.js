@@ -10,7 +10,7 @@ const schemaUser = new Schema(
 		email: {
 			type: String,
 			required: [true, 'Email is required'],
-			unique: true, // evita duplicado en el email
+			unique: true,
 			trim: true,
 			lowercase: true,
 			match: [
@@ -34,7 +34,7 @@ const schemaUser = new Schema(
 		},
 	},
 	{
-		timestamps: true, // agrega createdAt y updatedAt automáticamente
+		timestamps: true,
 	}
 );
 

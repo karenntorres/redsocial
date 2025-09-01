@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: './navigation.html',
   styleUrls: ['./navigation.css'],
-  imports: [CommonModule, RouterModule], // ✅ RouterModule covers routerLink, routerLinkActive, etc.
+  imports: [CommonModule, RouterModule],
 })
 export class Navigation {
   constructor(private router: Router) {}

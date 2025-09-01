@@ -17,7 +17,7 @@ export class RegisterService {
     email: string,
     password: string,
     username: string,
-    pfPicture: File | null // 👈 File, not string
+    pfPicture: File | null
   ): Observable<ApiResponse> {
     const formData = new FormData();
     formData.append('name', name);
@@ -26,9 +26,33 @@ export class RegisterService {
     formData.append('username', username);
 
     if (pfPicture) {
-      formData.append('pfPicture', pfPicture); // 👈 must match backend field name
+      formData.append('pfPicture', pfPicture);
     }
 
     return this.httpClient.post<ApiResponse>(this.API_URL, formData);
+  }
+
+  updateUser(
+    userId: string,
+    name: string,
+    password: string,
+    username: string,
+    pfPicture: File | null
+  ): Observable<ApiResponse> {
+    const formData = new FormData();
+    if (name) formData.append('name', name);
+
+    if (password) formData.append('password', password);
+
+    if (username) formData.append('username', username);
+
+    if (pfPicture) {
+      formData.append('pfPicture', pfPicture);
+    }
+
+    return this.httpClient.post<ApiResponse>(
+      `${this.API_URL}/${userId}`,
+      formData
+    );
   }
 }

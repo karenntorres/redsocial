@@ -140,3 +140,95 @@
 [2025-09-01T05:29:13.804Z] Consulta de todos los usuarios
 [2025-09-01T05:29:13.965Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
 [2025-09-01T05:29:14.034Z] Usuario consultado: 68b52f272bcbef46ec56a90b
+[2025-09-01T05:30:54.057Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T05:30:59.210Z] Consulta de todos los usuarios
+[2025-09-01T05:30:59.220Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T05:30:59.308Z] Usuario consultado: 68b52f8ccb4d06933d4b730c
+[2025-09-01T05:31:58.711Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T05:31:59.474Z] Consulta de todos los usuarios
+[2025-09-01T05:31:59.656Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T05:31:59.739Z] Usuario consultado: 68b52fcd9c8bb375eec7955b
+[2025-09-01T05:32:26.722Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T05:32:27.904Z] Consulta de todos los usuarios
+[2025-09-01T05:32:28.075Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T05:32:28.145Z] Usuario consultado: 68b52fe9955532ed169eedea
+[2025-09-01T17:23:59.632Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T17:24:00.313Z] Consulta de todos los usuarios
+[2025-09-01T17:24:00.467Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T17:24:00.536Z] Usuario consultado: 68b5d6ad4b14a50c95545ed0
+[2025-09-01T19:45:38.649Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T19:45:39.331Z] Consulta de todos los usuarios
+[2025-09-01T19:45:39.513Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T19:45:39.594Z] Usuario consultado: 68b5f7e19c90690525499497
+[2025-09-01T20:12:52.564Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T20:12:53.299Z] Consulta de todos los usuarios
+[2025-09-01T20:12:53.462Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T20:12:53.531Z] Usuario consultado: 68b5fe436643e01f0fdf01f2
+[2025-09-01T20:13:45.220Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T20:13:45.951Z] Consulta de todos los usuarios
+[2025-09-01T20:13:46.113Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T20:13:46.183Z] Usuario consultado: 68b5fe782c4db53fe6b891db
+[2025-09-01T20:19:32.046Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T20:20:01.468Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T20:38:27.234Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T20:38:32.392Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T20:38:32.467Z] Usuario consultado: 68b6044143e0ea19d00d0a3d
+[2025-09-01T20:40:18.744Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T20:40:19.414Z] Consulta de todos los usuarios
+[2025-09-01T20:40:19.582Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T20:40:19.652Z] Usuario consultado: 68b604b1c7e8fc1aafaf2b26
+[2025-09-01T20:40:51.975Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T20:40:52.722Z] Consulta de todos los usuarios
+[2025-09-01T20:40:52.885Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T20:40:52.955Z] Usuario consultado: 68b604d2720d8157e5a9e5c6
+[2025-09-01T20:41:10.112Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T20:41:10.819Z] Consulta de todos los usuarios
+[2025-09-01T20:41:10.984Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T20:41:11.053Z] Usuario consultado: 68b604e51993ac7386e0a9b0
+[2025-09-01T20:42:22.626Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T20:42:23.365Z] Consulta de todos los usuarios
+[2025-09-01T20:42:23.529Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T20:42:23.598Z] Usuario consultado: 68b6052d1034d8e1c18d7c47
+[2025-09-01T20:42:59.697Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T20:43:00.400Z] Consulta de todos los usuarios
+[2025-09-01T20:43:00.570Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T20:43:00.649Z] Usuario consultado: 68b60552f02590b8c6665b08
+[2025-09-01T20:44:22.973Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T20:44:23.830Z] Consulta de todos los usuarios
+[2025-09-01T20:44:23.996Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T20:44:24.069Z] Usuario consultado: 68b605a59791d578b69b9293
+[2025-09-01T21:09:47.444Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T21:09:50.867Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T21:10:01.751Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T21:10:19.976Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T21:10:28.460Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T21:21:41.142Z] Usuario creado: {"name":"Test User","email":"test@example.com","username":"tester"}
+[2025-09-01T21:21:41.840Z] Consulta de todos los usuarios
+[2025-09-01T21:21:41.999Z] Usuario creado: {"name":"Another User","email":"another@example.com","username":"anotheruser123"}
+[2025-09-01T21:21:42.069Z] Usuario consultado: 68b60e641e6da65b7ed09ec3
+[2025-09-01T21:24:09.402Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T21:24:19.176Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T21:30:59.134Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T21:31:13.874Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T21:31:17.495Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:03:14.030Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:03:43.281Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:03:51.249Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:03:55.758Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:04:11.496Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:04:13.757Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:04:16.051Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:04:23.111Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:04:25.540Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:04:44.112Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:05:04.987Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:05:12.440Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:05:45.682Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:06:48.504Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:06:55.540Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:11:27.839Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:11:43.521Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:11:51.510Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:13:04.090Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:15:21.991Z] Usuario consultado: 6882ccbc49adba0097c90bf7
+[2025-09-01T22:15:41.598Z] Usuario consultado: 6882ccbc49adba0097c90bf7

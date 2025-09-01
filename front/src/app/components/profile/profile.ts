@@ -56,10 +56,10 @@ export class Profile implements OnInit {
       })
       .subscribe({
         next: (res: any) => {
-          console.log('📦 Raw response from backend:', res);
+          console.log(' Raw response from backend:', res);
 
           const u = res?.data ?? res;
-          // Ensure Angular change detection runs
+
           this.zone.run(() => {
             this.user = u;
             this.safePicture = u?.pfPicture

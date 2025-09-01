@@ -12,13 +12,11 @@ servidor.use(express.json({ limit: '10mb' }));
 servidor.use(express.urlencoded({ extended: true, limit: '10mb' }));
 servidor.use(cors());
 
-// Rutas
 servidor.use('/posts', routerPost);
 servidor.use('/comments', routerComments);
 servidor.use('/users', routerUsers);
 servidor.use('/loginUser', routerLogin);
 
-// Ruta por defecto
 servidor.get('/', (sol, res) => {
 	res.status(404).send('Not found');
 });

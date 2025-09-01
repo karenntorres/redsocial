@@ -1,10 +1,9 @@
 import multer from 'multer';
 import path from 'path';
 
-// Configure disk storage
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, 'images/'); // folder where images will be stored
+		cb(null, 'images/');
 	},
 	filename: (req, file, cb) => {
 		const extension = path.extname(file.originalname);
@@ -18,7 +17,6 @@ const storage = multer.diskStorage({
 	},
 });
 
-// Multer instance, expecting field "pfPicture"
 const upload = multer({ storage });
 
 export default upload;

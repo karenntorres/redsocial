@@ -11,7 +11,7 @@ import { PostService } from '../../services/posts-service';
   standalone: true,
   imports: [CommonModule, FormsModule, Navigation, RouterOutlet],
   templateUrl: './posts.html',
-  styleUrls: ['./posts.css']
+  styleUrls: ['./posts.css'],
 })
 export class Posts implements OnInit {
   nuevaPublicacion: string = '';
@@ -28,7 +28,7 @@ export class Posts implements OnInit {
       },
       error: (err: unknown) => {
         console.error('Error al cargar posts:', err);
-      }
+      },
     });
   }
 
@@ -43,14 +43,15 @@ export class Posts implements OnInit {
 
     this.cargando = true;
 
-    const tempId = 'temp-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6);
+    const tempId =
+      'temp-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6);
 
     const postTemp: PostModel = {
       _id: tempId,
       contenido: this.nuevaPublicacion.trim(),
       imagen: this.imagenSeleccionada
         ? URL.createObjectURL(this.imagenSeleccionada)
-        : undefined
+        : undefined,
     };
 
     this.posts = [postTemp, ...this.posts];
@@ -68,21 +69,23 @@ export class Posts implements OnInit {
 
         this.posts = [
           nuevoPost,
-          ...this.posts.filter(p => p._id !== postTemp._id)
+          ...this.posts.filter((p) => p._id !== postTemp._id),
         ];
 
         this.nuevaPublicacion = '';
         this.imagenSeleccionada = null;
 
-        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+        const fileInput = document.querySelector(
+          'input[type="file"]'
+        ) as HTMLInputElement;
         if (fileInput) fileInput.value = '';
         this.cargando = false;
       },
       error: (err: unknown) => {
         console.error('Error al crear el post:', err);
-        this.posts = this.posts.filter(p => p._id !== postTemp._id);
+        this.posts = this.posts.filter((p) => p._id !== postTemp._id);
         this.cargando = false;
-      }
+      },
     });
   }
 
@@ -92,7 +95,7 @@ export class Posts implements OnInit {
     console.log('Eliminar solicitado para ID:', post._id);
 
     if (post._id.startsWith('temp')) {
-      this.posts = this.posts.filter(p => p._id !== post._id);
+      this.posts = this.posts.filter((p) => p._id !== post._id);
       return;
     }
 
@@ -100,19 +103,17 @@ export class Posts implements OnInit {
 
     this.postService.deletePost(post._id).subscribe({
       next: () => {
-        this.posts = this.posts.filter(p => p._id !== post._id);
+        this.posts = this.posts.filter((p) => p._id !== post._id);
         this.cargando = false;
       },
       error: (err: unknown) => {
         console.error('Error al eliminar el post:', err);
         this.cargando = false;
-      }
+      },
     });
   }
 
   trackByPostId(index: number, post: PostModel): string {
     return post._id ?? index.toString();
   }
-
 }
-
